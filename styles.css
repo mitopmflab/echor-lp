@@ -1,0 +1,1650 @@
+/* ───────────────────────────────────────────────
+   Echor — ことばの箱庭
+   warm light gray, breathing, literary minimal
+   ─────────────────────────────────────────────── */
+
+:root{
+  /* type */
+  --f-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif;
+  --f-min: "Shippori Mincho B1", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --f-lat: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --f-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* warm palette (default) */
+  --bg-0: #faf8f4;       /* page */
+  --bg-1: #f3efe7;       /* card */
+  --bg-2: #ece6da;       /* hairline */
+  --ink-0: #2a2724;      /* primary */
+  --ink-1: #5a534b;      /* secondary */
+  --ink-2: #8a847a;      /* muted */
+  --ink-3: #b8b1a4;      /* faint */
+  --accent: oklch(58% 0.04 230);   /* soft slate-blue */
+  --accent-2: oklch(62% 0.04 160); /* soft sage */
+  --rule: rgba(42,39,36,0.08);
+
+  /* motion intensity */
+  --m-speed: 1;
+  --m-drift: 1;
+
+  --maxw: 1180px;
+  --readw: 640px;
+}
+
+/* warmer/cooler/paper palettes via body class (Tweak swap) */
+body.palette-paper{
+  --bg-0:#f7f4ec; --bg-1:#efeadd; --bg-2:#e6dfcc;
+  --ink-0:#2a2620; --ink-1:#5b544a; --ink-2:#8a8276;
+  --accent: oklch(60% 0.045 70);
+  --accent-2: oklch(60% 0.04 30);
+}
+body.palette-mist{
+  --bg-0:#f5f6f5; --bg-1:#ecedea; --bg-2:#e1e3df;
+  --ink-0:#26282a; --ink-1:#535659; --ink-2:#828690;
+  --accent: oklch(60% 0.045 220);
+  --accent-2: oklch(62% 0.04 180);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg-0);
+  color:var(--ink-0);
+  font-family:var(--f-jp);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  line-height:1.85;
+  letter-spacing:.02em;
+  overflow-x:hidden;
+}
+
+::selection{background:rgba(42,39,36,.12);color:var(--ink-0)}
+
+a{color:inherit;text-decoration:none}
+em{font-style:normal;color:var(--ink-0);
+  background:linear-gradient(transparent 70%, rgba(42,39,36,.08) 70%);
+  padding:0 .1em;}
+
+/* ───────── reveal (IntersectionObserver) ───────── */
+.reveal{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity calc(1.6s * var(--m-speed)) cubic-bezier(.2,.6,.2,1),
+             transform calc(1.6s * var(--m-speed)) cubic-bezier(.2,.6,.2,1);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.is-in{opacity:1; transform:none}
+
+/* ───────── NAV ───────── */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:22px 32px;
+  background:linear-gradient(180deg, rgba(250,248,244,.85), rgba(250,248,244,0));
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+.nav-logo{display:flex; align-items:baseline; gap:12px;}
+.logo-mark{
+  font-family:var(--f-lat); font-style:italic; font-weight:400;
+  font-size:22px; letter-spacing:.02em; color:var(--ink-0);
+}
+.logo-sub{
+  font-family:var(--f-min); font-size:11px; font-weight:400;
+  color:var(--ink-2); letter-spacing:.18em;
+}
+.nav-links{display:flex; align-items:center; gap:28px;}
+.nav-links a{font-size:12px; color:var(--ink-1); letter-spacing:.12em}
+.nav-links a:hover{color:var(--ink-0)}
+.nav-cta{
+  border:1px solid var(--rule); padding:8px 14px; border-radius:999px;
+  font-size:11px !important; letter-spacing:.14em;
+}
+.nav-cta:hover{background:rgba(42,39,36,.04)}
+
+/* ───────── HERO ───────── */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:160px 24px 120px;
+  overflow:hidden;
+}
+.hero-inner{
+  position:relative; z-index:2;
+  width:100%; max-width:760px; margin:0 auto;
+  text-align:center;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; letter-spacing:.22em; color:var(--ink-2);
+  margin-bottom:48px; text-transform:uppercase;
+  font-family:var(--f-lat); font-style:italic;
+}
+.eyebrow .dot{
+  width:6px;height:6px;border-radius:99px;background:var(--accent);
+  box-shadow:0 0 0 4px rgba(0,0,0,.02);
+  animation:pulse 3.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:.5; transform:scale(1)}
+  50%{opacity:1; transform:scale(1.2)}
+}
+
+.hero-title{
+  font-family:var(--f-min);
+  font-weight:300;
+  font-size:clamp(34px, 5.4vw, 64px);
+  line-height:1.55;
+  letter-spacing:.04em;
+  margin:0 0 40px;
+  color:var(--ink-0);
+  hanging-punctuation:force-end;
+}
+.hero-title .quiet{color:var(--ink-2)}
+.hero-title .ruby{
+  position:relative; display:inline-block;
+}
+.hero-title .ruby::before{
+  content:attr(data-ruby);
+  position:absolute; left:50%; top:-1.2em; transform:translateX(-50%);
+  font-family:var(--f-min); font-size:.32em; letter-spacing:.3em;
+  color:var(--ink-3); white-space:nowrap;
+}
+
+.hero-sub{
+  max-width:520px; margin:0 auto 56px;
+  font-size:14px; line-height:2.2;
+  color:var(--ink-1); font-weight:300;
+}
+
+/* ───────── NOTIFY FORM ───────── */
+.notify{
+  display:flex; align-items:center; gap:0;
+  width:100%; max-width:440px; margin:0 auto;
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--rule);
+  border-radius:999px;
+  padding:6px;
+  transition:border-color .4s ease, background .4s ease;
+}
+.notify:focus-within{
+  border-color:rgba(42,39,36,.18);
+  background:rgba(255,255,255,.8);
+}
+.notify input{
+  flex:1; border:0; outline:0; background:transparent;
+  padding:12px 18px;
+  font:inherit; font-size:13px; color:var(--ink-0);
+}
+.notify input::placeholder{color:var(--ink-3)}
+.notify button{
+  display:inline-flex; align-items:center; gap:10px;
+  border:0; cursor:pointer;
+  flex:0 0 auto; white-space:nowrap;
+  background:var(--ink-0); color:var(--bg-0);
+  padding:11px 20px; border-radius:999px;
+  font:inherit; font-size:12px; letter-spacing:.1em;
+  transition:transform .3s ease, background .3s ease;
+}
+.notify button span{white-space:nowrap}
+.notify button:hover{background:#000}
+.notify button:hover .arr{transform:translateX(4px)}
+.notify button .arr{font-style:normal; transition:transform .3s ease;}
+.notify-foot{
+  margin:18px 0 0; font-size:11px; color:var(--ink-3);
+  letter-spacing:.1em;
+}
+.notify-foot.center{text-align:center}
+
+/* drifting word fragments behind hero */
+.drift-field{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  opacity:.55;
+}
+.drift{
+  position:absolute;
+  left:var(--x); top:var(--y);
+  transform:translate(-50%,-50%);
+  font-family:var(--f-min);
+  font-size:13px; color:var(--ink-2);
+  letter-spacing:.08em;
+  white-space:nowrap;
+  animation: drift var(--d, 28s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  opacity:0;
+}
+@keyframes drift{
+  0%   { transform:translate(-50%,-50%) translateY(0) translateX(0);  opacity:0;}
+  15%  { opacity:.7;}
+  50%  { transform:translate(-50%,-50%) translateY(-14px) translateX(8px); opacity:.55;}
+  85%  { opacity:.6;}
+  100% { transform:translate(-50%,-50%) translateY(0) translateX(0);  opacity:0;}
+}
+
+/* ripple under hero center */
+.hero-ripple{
+  position:absolute; left:50%; top:62%; transform:translate(-50%,-50%);
+  width:480px; height:480px; pointer-events:none; z-index:0;
+}
+.hero-ripple span{
+  position:absolute; inset:50%;
+  border:1px solid var(--rule);
+  border-radius:999px;
+  animation: ripple 8s ease-out infinite;
+}
+.hero-ripple span:nth-child(2){animation-delay:-2.6s}
+.hero-ripple span:nth-child(3){animation-delay:-5.3s}
+@keyframes ripple{
+  0%  { width:0; height:0; opacity:0; }
+  10% { opacity:.7; }
+  100%{ width:560px; height:560px; margin-left:-280px; margin-top:-280px; opacity:0;}
+}
+
+.scroll-hint{
+  position:absolute; left:50%; bottom:34px; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  font-family:var(--f-lat); font-style:italic; font-size:11px;
+  color:var(--ink-3); letter-spacing:.32em;
+}
+.scroll-hint i{
+  width:1px; height:42px; background:var(--ink-3);
+  position:relative; overflow:hidden;
+}
+.scroll-hint i::after{
+  content:""; position:absolute; left:0; right:0; height:14px;
+  background:var(--bg-0);
+  animation: scrollHint 2.4s ease-in-out infinite;
+}
+@keyframes scrollHint{
+  0%{top:-14px}
+  100%{top:42px}
+}
+
+/* ───────── SECTION CHROME ───────── */
+section{
+  position:relative;
+  padding:160px 32px;
+}
+.section-label{
+  display:flex; align-items:center; gap:18px;
+  max-width:var(--maxw); margin:0 auto 84px;
+  font-family:var(--f-lat); font-style:italic;
+  color:var(--ink-2); font-size:13px; letter-spacing:.2em;
+}
+.section-label i{
+  font-style:italic; color:var(--ink-3);
+  font-family:var(--f-lat);
+}
+.section-label::before{
+  content:""; flex:0 0 48px; height:1px; background:var(--rule);
+}
+.section-label::after{
+  content:""; flex:1 1 auto; height:1px; background:var(--rule);
+}
+
+/* ─────────────────────────────────────────────────
+   02 — 残ってしまうことば
+   「響いたことば」と「散らばる、ということ」を1つの流れに統合。
+   スクロールで実用メモが少しずつ増え、断片が日常の中に紛れていく。
+   ───────────────────────────────────────────────── */
+@property --mp {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+
+.linger{
+  position: relative;
+  background: var(--bg-0);
+  padding: 0 0 60px;
+}
+
+/* ── Section header — small heading and a short sub copy. */
+.linger-head{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 140px 32px 0;
+  text-align: center;
+}
+.linger-head-sub{
+  margin: 36px auto 0;
+  max-width: 440px;
+  font-family: var(--f-min);
+  font-weight: 300;
+  font-size: clamp(13px, 1.4vw, 16px);
+  line-height: 2.2;
+  letter-spacing: .08em;
+  color: var(--ink-2);
+}
+
+/* ── Track — provides the extra scroll distance during which the canvas
+   is pinned. ~145vh total, of which ~65vh becomes the pin range
+   (track.height - canvas.height). The pin is intentionally brief —
+   sticky is a feather-hold, not a stage. */
+.linger-track{
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 56px auto 0;
+  height: 145vh;
+  padding: 0 32px 40px;
+}
+
+/* Canvas — sticky inside the track. 80vh tall, top: 10vh. */
+.linger-canvas{
+  position: sticky;
+  top: 10vh;
+  width: 100%;
+  height: 80vh;
+  min-height: 560px;
+}
+
+/* ── Fragment cards (3) — cream paper, large Mincho, soft shadow.
+   Generous whitespace. Distributed across the canvas. They stay solid
+   and readable throughout — they don't fade. They simply get covered by
+   later memos. (Their z-index is lower than memos.) */
+.linger-quote{
+  position: absolute;
+  margin: 0;
+  padding: 26px 32px;
+  width: 360px;
+  max-width: 88vw;
+  background: rgba(253, 250, 242, .94);   /* warm cream paper */
+  border: 1px solid rgba(42, 39, 36, .06);
+  border-radius: 2px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.6) inset,
+    0 22px 44px -28px rgba(42,39,36,.24);
+  z-index: 1;
+}
+.linger-quote blockquote{
+  margin: 0;
+  font-family: var(--f-min);
+  font-weight: 300;
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 2.0;
+  letter-spacing: .05em;
+  color: var(--ink-0);
+}
+.linger-quote figcaption{
+  margin-top: 16px;
+  font-family: var(--f-lat); font-style: italic;
+  font-size: 11px; letter-spacing: .22em;
+  color: var(--ink-2);
+}
+
+/* Distribute across the canvas — diagonal flow, generous gaps. */
+.linger-q1{ left: 8%;  top: 6%;  transform: rotate(-1.4deg); }
+.linger-q2{ left: 38%; top: 38%; transform: rotate( 1.6deg); }
+.linger-q3{ left: 60%; top: 72%; transform: rotate(-0.8deg); }
+
+/* ── Utility cards — they are NOT introduced as the user scrolls; they
+   are quietly present from the start, only at very low presence (0.15
+   opacity, blurred). As --mp climbs, they emerge: opacity rises, blur
+   resolves, shadow deepens. The reading should be "the daily memos
+   were always there; now they're surfacing", not "cards are appearing".
+
+   --appear-at survives but with a much wider, gentler curve — it now
+   only stagger-offsets WHICH card emerges first, not whether it appears
+   at all. By --mp=1, every card has fully emerged. */
+.linger-memo{
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  width: var(--w, 240px);
+  /* emergence progress per card. The (--appear-at * 0.35) offset keeps
+     the staggering subtle — even the latest card is already at low
+     opacity from the start, and rises smoothly. */
+  --emerge: max(0, min(1,
+    (var(--mp, 0) - var(--appear-at, 0) * 0.35) / 0.72
+  ));
+  transform: rotate(var(--r, 0deg));
+  transform-origin: 50% 50%;
+  /* Always at least faintly present. The user never sees a card "pop in" —
+     they only see presence rise. */
+  opacity: calc(0.15 + var(--emerge) * 0.85);
+  filter: blur(calc((1 - var(--emerge)) * 2.4px));
+  background: #ffffff;
+  border: 1px solid rgba(42, 39, 36, calc(.04 + var(--emerge) * .04));
+  border-radius: 6px;
+  padding: 18px 22px 20px;
+  /* Shadow strengthens as the card surfaces. */
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.6) inset,
+    0 calc(8px + var(--emerge) * 10px) calc(20px + var(--emerge) * 16px)
+      -24px rgba(42, 39, 36, calc(.12 + var(--emerge) * .13)),
+    0 calc(3px + var(--emerge) * 3px) calc(8px + var(--emerge) * 6px)
+      -10px rgba(42, 39, 36, calc(.06 + var(--emerge) * .06));
+  z-index: 3;
+}
+@property --emerge {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+@property --appear-at {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.linger-memo .memo-title{
+  margin: 0 0 12px;
+  font-family: var(--f-jp);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: var(--ink-0);
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(42, 39, 36, .08);
+}
+.linger-memo .memo-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.linger-memo .memo-list li{
+  position: relative;
+  padding-left: 18px;
+  font-family: var(--f-jp);
+  font-weight: 400;
+  font-size: 12.5px;
+  line-height: 1.5;
+  letter-spacing: .03em;
+  color: var(--ink-1);
+}
+/* unfilled circular checkbox before each item — pure utility-memo cue */
+.linger-memo .memo-list li::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 4px;
+  width: 9px; height: 9px;
+  border: 1px solid rgba(42, 39, 36, .25);
+  border-radius: 99px;
+  background: #fff;
+}
+
+/* ───────── 04 CONCEPT — 静かな箱庭 ───────── */
+
+/* Register animatable custom properties for the garden.
+   --breath-y drives the per-fragment breathing transform via keyframes.
+   --gp-atmos is the AIR signal (0→1): warm tint, anchor opacity.
+   --gp-pull  is the FRAGMENT signal (0→1): pull strength, shadow depth.
+   --gp is kept as an alias of --gp-atmos for backwards-compat. */
+@property --breath-y {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+@property --gp {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+@property --gp-atmos {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+@property --gp-pull {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+@property --gp-settle {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+@property --pull-x {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+@property --pull-y {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+@property --land-x {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+@property --land-y {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+@property --land-r-deg {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+/* Derived per-fragment values: must be registered as <number> so calc() in
+   nested vars actually resolves them numerically. Without this, they fall
+   back to 0 and the entire dissolve/pile system silently does nothing. */
+@property --settle-start {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+@property --settle-end {
+  syntax: '<number>';
+  initial-value: 1;
+  inherits: false;
+}
+@property --local-settle {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+@property --dissolve {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+@property --edge-dissolve {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+@property --travel-scale {
+  syntax: '<number>';
+  initial-value: 0.42;
+  inherits: false;
+}
+
+.concept{
+  background:var(--bg-0);
+  color:var(--ink-0);
+  overflow:hidden;
+  padding-bottom:200px;
+}
+.concept-copy{
+  max-width:var(--readw); margin:0 auto 120px;
+  text-align:center;
+}
+.concept-lead{
+  font-family:var(--f-min); font-weight:300;
+  font-size:clamp(26px, 3.4vw, 42px);
+  line-height:1.7; letter-spacing:.08em;
+  margin:0; color:var(--ink-0);
+}
+.concept-lead em{
+  background:linear-gradient(transparent 70%, rgba(42,39,36,.08) 70%);
+}
+
+/* the garden — words quietly gathering, not arranged */
+.garden{
+  position:relative;
+  max-width:1100px; margin:0 auto;
+}
+.garden-field{
+  position:relative;
+  height:600px;
+  /* base air: a barely-warmer pool drawn toward an off-center gravity point */
+  background:
+    radial-gradient(ellipse 38% 50% at 49% 54%, rgba(42,39,36,.045), transparent 65%),
+    radial-gradient(ellipse 68% 70% at 49% 54%, rgba(42,39,36,.015), transparent 72%);
+}
+/* a soft outer vignette so the edges feel quieter (air is less dense outside) */
+.garden-field::after{
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 70% at 49% 54%,
+                              transparent 50%, rgba(250,248,244,.6) 95%);
+  pointer-events:none;
+}
+/* faint paper grain across the garden, denser toward center */
+.garden-field::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    radial-gradient(circle at 49% 54%, rgba(42,39,36,.018) 1px, transparent 1.5px),
+    radial-gradient(circle at 30% 60%, rgba(42,39,36,.012) 1px, transparent 1.5px),
+    radial-gradient(circle at 65% 45%, rgba(42,39,36,.014) 1px, transparent 1.5px);
+  background-size: 140px 140px, 220px 220px, 260px 260px;
+  pointer-events:none;
+  opacity:.9;
+}
+
+/* gathering light: a slow-breathing warm pool at the gravity point */
+.garden-pool{
+  position:absolute; left:49%; top:54%;
+  width:560px; height:560px;
+  transform:translate(-50%,-50%);
+  background: radial-gradient(circle,
+              rgba(255, 245, 220, .35) 0%,
+              rgba(255, 245, 220, .12) 30%,
+              transparent 65%);
+  filter: blur(8px);
+  pointer-events:none;
+  animation: poolBreathe calc(14s * var(--m-drift,1)) ease-in-out infinite;
+}
+.garden-pool.garden-pool-warm{
+  width:300px; height:300px;
+  background: radial-gradient(circle,
+              rgba(255, 240, 210, .4) 0%,
+              rgba(255, 240, 210, .14) 40%,
+              transparent 70%);
+  animation-delay:-7s;
+  animation-duration: calc(18s * var(--m-drift,1));
+}
+@keyframes poolBreathe{
+  0%,100%{ opacity:.85; transform:translate(-50%,-50%) scale(1);}
+  50%    { opacity:1;   transform:translate(-50%,-50%) scale(1.06);}
+}
+
+/* a very faint atmospheric layer — three whisper hues mixed as AIR, not glow.
+   Warm beige at the core, pale sage in the middle, whisper indigo at the
+   edge, all softened to off-white. Driven by --gp-atmos so the air arrives
+   BEFORE the fragments start to align. Capped opacity ~0.6 — still "air". */
+.garden-tint{
+  position:absolute; left:49%; top:54%;
+  width:900px; height:800px;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 30% 36% at 50% 50%, rgba(244, 226, 192, .65), transparent 70%),
+    radial-gradient(ellipse 50% 54% at 50% 50%, rgba(208, 222, 206, .42), transparent 72%),
+    radial-gradient(ellipse 72% 76% at 50% 50%, rgba(214, 222, 232, .32), transparent 78%);
+  filter: blur(40px);
+  opacity: calc(var(--gp-atmos, 0) * 0.62);
+  mix-blend-mode: multiply;
+  transition: opacity .8s linear;
+}
+
+/* a kakera — a fragment of paper holding one phrase.
+
+   Travel is intentionally modest: ~60% of the way toward the pile slot,
+   so fragments don't visibly migrate to the centre. Instead, as
+   --gp-settle advances past each fragment's start threshold, the fragment
+   *dissolves* — opacity drops, blur rises, shadow softens. Meanwhile,
+   sheets inside .anchor-stack fade IN, so the eye reads: "the outside
+   presence shifted into the pile's depth", not "the cards moved into a stack".
+
+   --local-settle is the per-fragment progress within its window. */
+.kakera{
+  position:absolute;
+  left:var(--x); top:var(--y);
+
+  --local-settle: max(0, min(1,
+    (var(--gp-settle, 0) - var(--settle-start, 0))
+      / (var(--settle-end, 1) - var(--settle-start, 0))
+  ));
+
+  /* Travel scaled to ~40% of slot — fragments barely move physically.
+     The pile is built through "presence shift" (edge/shadow/bg dissolve →
+     stack sheets appear), not through travel. */
+  --travel-scale: 0.42;
+
+  /* The dissolve curve. Almost no change until local_settle ~0.38, then a
+     soft ramp toward full dissolve at 1. Two-stage soft easing built in. */
+  --dissolve: max(0, min(1, (var(--local-settle) - 0.38) / 0.58));
+  /* Edge-dissolve runs slightly ahead of opacity-dissolve. The card's
+     OUTLINE softens first; the fill follows. */
+  --edge-dissolve: max(0, min(1, (var(--local-settle) - 0.30) / 0.55));
+
+  transform:
+    translate(-50%, -50%)
+    translate(
+      calc(var(--pull-x, 0px) * var(--gp-pull, 0) * (1 - var(--local-settle))
+            + var(--land-x, 0px) * var(--local-settle) * var(--travel-scale)),
+      calc(var(--pull-y, 0px) * var(--gp-pull, 0) * (1 - var(--local-settle))
+            + var(--land-y, 0px) * var(--local-settle) * var(--travel-scale))
+    )
+    translateY(var(--breath-y, 0px))
+    rotate(calc(
+      var(--r, 0deg)
+        + (var(--land-r-deg, var(--r, 0deg)) - var(--r, 0deg)) * var(--local-settle)
+    ));
+
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(42,39,36,.06);
+  border-radius:2px;
+  padding:14px 22px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.6) inset,
+    0 14px 30px -22px rgba(42,39,36,.22);
+  animation: breathe calc(20s * var(--m-drift,1)) ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  will-change: transform, opacity, filter;
+}
+
+/* Per-class settle windows. The windows overlap deliberately — there's no
+   strict sequence, just a slow soak where presence shifts inward.
+   The anchor is exempt — it never dissolves. */
+.kakera.ka-near       { --settle-start: 0.00; --settle-end: 0.70; z-index: 5; }
+.kakera.ka-paper-near { --settle-start: 0.06; --settle-end: 0.74; z-index: 2; }
+.kakera.ka-mid        { --settle-start: 0.14; --settle-end: 0.82; z-index: 4; }
+.kakera.ka-paper      { --settle-start: 0.20; --settle-end: 0.86; z-index: 2; }
+.kakera.ka-far        { --settle-start: 0.28; --settle-end: 1.00; z-index: 3; }
+.kakera.ka-anchor     { --settle-start: 0.00; --settle-end: 1.00; z-index: 10;
+                        --travel-scale: 0;
+                        --dissolve: 0;
+                        --edge-dissolve: 0; }
+.kakera p{
+  margin:0;
+  font-family:var(--f-min); font-weight:300;
+  font-size:14px; line-height:1.9;
+  letter-spacing:.06em; color:var(--ink-0);
+}
+/* anchor — the first word placed here. It never travels, never dissolves.
+   Its shadow deepens with PULL, then deepens further at SETTLE: the bundle
+   is gaining weight as the outer fragments' presence shifts inward.
+
+   Once settle is high, an extremely subtle shadow-life animation runs —
+   "residual breath" — so the bundle never reads as "completed/frozen". */
+.kakera.ka-anchor{
+  padding:22px 30px;
+  background:rgba(255,255,255,.94);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 22px 44px -28px rgba(42,39,36,.28),
+    0 calc(var(--gp-pull,0) * 30px) calc(var(--gp-pull,0) * 70px + 1px)
+      calc(var(--gp-pull,0) * -22px)
+      rgba(42, 39, 36, calc(var(--gp-pull,0) * .2)),
+    /* settle-only resting shadow: deeper, denser — paper resting on paper */
+    0 calc(var(--gp-settle,0) * 10px) calc(var(--gp-settle,0) * 22px)
+      calc(var(--gp-settle,0) * -4px)
+      rgba(42, 39, 36, calc(var(--gp-settle,0) * .14));
+  animation:
+    breathe calc(20s * var(--m-drift,1)) ease-in-out infinite,
+    anchorResidualBreath calc(11s * var(--m-drift,1)) ease-in-out infinite;
+  animation-delay: var(--d, 0s), 0s;
+}
+@keyframes anchorResidualBreath{
+  /* an almost-imperceptible secondary translation, only readable when the
+     bundle has truly settled — the residual life of the pile */
+  0%,100%{ filter: brightness(1) drop-shadow(0 0 0 rgba(0,0,0,0)); }
+  50%    { filter: brightness(0.998)
+                   drop-shadow(0 calc(var(--gp-settle, 0) * 1px)
+                               calc(var(--gp-settle, 0) * 4px)
+                               rgba(42,39,36, calc(var(--gp-settle, 0) * .04))); }
+}
+
+/* The anchor-stack — paper sheets that fade IN under the anchor as the
+   outer fragments dissolve. The pile is designed to read as TIME ACCUMULATING
+   here — not as cards being stacked. So each sheet has:
+     - a larger vertical offset than the one above it (the pile thickens)
+     - a softer, more diffused shadow as we go down (the lower layers sink
+       into the air rather than resting on a surface)
+     - a more blurred / paler edge near the bottom (older layers fade into
+       paper grain)
+     - its own residual-breath cadence (top breathes a touch faster,
+       deeper layers breathe much slower) so the pile feels like a climate
+       rather than a synced animation
+     - a delayed "ふわっ" appearance — opacity transition runs ~0.2s slower
+       than the outer fragment that's dissolving into it, so the eye catches
+       the moment a layer arrives
+
+   Sheets sit BEHIND the anchor (z-index 1) so the anchor text always reads
+   clearly. */
+.anchor-stack{
+  position:absolute; left:49%; top:54%;
+  width: 240px; height: 118px;
+  /* very slight overall sink — the whole pile rests a hair lower than the
+     anchor: it feels grounded, not floating */
+  transform:translate(-50%, calc(-50% + 2px));
+  pointer-events:none;
+  z-index: 1;
+  /* the top-level breath is gentle; per-sheet breaths layer below */
+  animation: stackBreathe calc(24s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes stackBreathe{
+  0%,100%{ transform: translate(-50%, calc(-50% + 2px)) translateY(0); }
+  50%    { transform: translate(-50%, calc(-50% + 2px)) translateY(-1.2px); }
+}
+.anchor-stack .stack-sheet{
+  position:absolute; inset:0;
+  border-radius:2px;
+  /* opacity is the main fade-in — the slow transition is what gives the
+     "ふわっ" delay relative to the dissolving fragment outside */
+  transition: opacity 1.6s linear, filter 1.6s linear;
+}
+
+/* Sheet 1 — top layer. Most recent. Mid-height shadow.
+   Breathes a hair faster than the others — the newest layer is closest
+   to "alive". */
+.anchor-stack .stack-1{
+  width: 100%; height: 100%;
+  background: rgba(255, 253, 248, .82);  /* warm cream */
+  border: 1px solid rgba(42, 39, 36, .055);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.55) inset,
+    0 10px 24px -20px rgba(42, 39, 36, .22);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.12) * 1.1);
+  animation: layerBreath1 calc(15s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes layerBreath1{
+  0%,100%{ transform: translate(7px, 9px) rotate(2.4deg); }
+  50%    { transform: translate(7px, 8.4px) rotate(2.4deg); }
+}
+
+/* Sheet 2 — below sheet 1, slightly larger, slightly cooler tone.
+   Layer offset deepens. */
+.anchor-stack .stack-2{
+  width: 101%; height: 100.5%;
+  left: -0.5%;
+  background: rgba(252, 250, 244, .76);
+  border: 1px solid rgba(42, 39, 36, .05);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.45) inset,
+    0 11px 28px -22px rgba(42, 39, 36, .2);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.20) * 1.18);
+  animation: layerBreath2 calc(19s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes layerBreath2{
+  0%,100%{ transform: translate(-7px, 14px) rotate(-2.6deg); }
+  50%    { transform: translate(-7px, 13.5px) rotate(-2.6deg); }
+}
+
+/* Sheet 3 — paper yellowish, softer shadow. */
+.anchor-stack .stack-3{
+  width: 102.5%; height: 101.5%;
+  left: -1.25%; top: -0.75%;
+  background: rgba(250, 247, 239, .68);
+  border: 1px solid rgba(42, 39, 36, .045);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.35) inset,
+    0 12px 32px -24px rgba(42, 39, 36, .18);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.32) * 1.3);
+  animation: layerBreath3 calc(24s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes layerBreath3{
+  0%,100%{ transform: translate(4px, 20px) rotate(1.6deg); }
+  50%    { transform: translate(4px, 19.6px) rotate(1.6deg); }
+}
+
+/* Sheet 4 — broader, edge starts to dissolve into air. */
+.anchor-stack .stack-4{
+  width: 105%; height: 103%;
+  left: -2.5%; top: -1.5%;
+  background: rgba(248, 246, 238, .58);
+  border: 1px solid rgba(42, 39, 36, .035);
+  box-shadow:
+    0 13px 36px -26px rgba(42, 39, 36, .15),
+    0 4px 14px -10px rgba(42, 39, 36, .05);
+  filter: blur(0.3px);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.46) * 1.5);
+  animation: layerBreath4 calc(28s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes layerBreath4{
+  0%,100%{ transform: translate(-7px, 26px) rotate(-1.4deg); }
+  50%    { transform: translate(-7px, 25.6px) rotate(-1.4deg); }
+}
+
+/* Sheet 5 — deeper into the pile. Blur visible, edge soft. */
+.anchor-stack .stack-5{
+  width: 108%; height: 105%;
+  left: -4%; top: -2.5%;
+  background: rgba(246, 244, 236, .48);
+  border: 1px solid rgba(42, 39, 36, .025);
+  box-shadow:
+    0 14px 40px -28px rgba(42, 39, 36, .12),
+    0 6px 18px -14px rgba(42, 39, 36, .04);
+  filter: blur(0.7px);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.58) * 1.65);
+  animation: layerBreath5 calc(34s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes layerBreath5{
+  0%,100%{ transform: translate(3px, 32px) rotate(0.8deg); }
+  50%    { transform: translate(3px, 31.7px) rotate(0.8deg); }
+}
+
+/* Sheet 6 — the bottom. Heavily blurred, almost paper grain.
+   Edge breaks up: a soft outward mask makes the bottom dissolve into
+   the page rather than ending at a clean rectangle.
+   Breathes very slowly — geological. */
+.anchor-stack .stack-6{
+  width: 113%; height: 108%;
+  left: -6.5%; top: -4%;
+  background: rgba(244, 242, 233, .4);
+  border: 1px solid rgba(42, 39, 36, .018);
+  box-shadow:
+    0 16px 44px -30px rgba(42, 39, 36, .1),
+    0 8px 22px -16px rgba(42, 39, 36, .035);
+  filter: blur(1.3px);
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 35%,
+                                       #000 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 70% 80% at 50% 35%,
+                                       #000 55%, transparent 100%);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.70) * 1.85);
+  animation: layerBreath6 calc(42s * var(--m-drift, 1)) ease-in-out infinite;
+}
+@keyframes layerBreath6{
+  0%,100%{ transform: translate(-3px, 38px) rotate(-0.5deg); }
+  50%    { transform: translate(-3px, 37.8px) rotate(-0.5deg); }
+}
+
+/* A diffuse ambient halo BENEATH the entire pile — the air around the
+   bundle gets very slightly heavier as time accumulates. Reads as
+   "this has been here for a while" not as a glow. */
+.anchor-stack::after{
+  content:"";
+  position:absolute;
+  left:50%; top:62%;
+  transform:translate(-50%, 0);
+  width: 130%; height: 80%;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%,
+                              rgba(42, 39, 36, .10),
+                              transparent 70%);
+  filter: blur(14px);
+  opacity: calc(max(0, var(--gp-settle, 0) - 0.40) * 0.7);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 1.6s linear;
+}
+.kakera.ka-anchor p{
+  font-size:17px; letter-spacing:.07em;
+  color:var(--ink-0);
+}
+/* near — close to the anchor, present but a touch lighter */
+.kakera.ka-near{
+  padding:16px 22px;
+  background:rgba(255,255,255,.78);
+}
+.kakera.ka-near p{font-size:14px}
+/* mid — still arriving */
+.kakera.ka-mid{
+  padding:12px 18px;
+  background:rgba(255,255,255,.62);
+}
+.kakera.ka-mid p{font-size:12.5px; line-height:1.85; color:var(--ink-1)}
+/* far — at the edge of the garden, faint */
+.kakera.ka-far{
+  padding:9px 14px;
+  background:rgba(255,255,255,.48);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.5) inset,
+    0 10px 22px -18px rgba(42,39,36,.18);
+}
+.kakera.ka-far p{font-size:11.5px; color:var(--ink-2); letter-spacing:.08em}
+
+/* a torn piece of paper with no words — just settling */
+.kakera.ka-paper{
+  width:78px; height:50px;
+  padding:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.32));
+  border:1px solid rgba(42,39,36,.05);
+  border-radius:1px;
+}
+.kakera.ka-paper-near{
+  width:96px; height:60px;
+  background:linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.5));
+}
+.kakera.ka-paper::after{
+  content:""; position:absolute; inset:12px;
+  border-top:1px solid rgba(42,39,36,.06);
+  border-bottom:1px solid rgba(42,39,36,.04);
+}
+
+/* pebbles — pure small dots, texture not voice.
+   They drift gently with pull but don't journey to the pile.
+   As the pile forms (settle), pebbles recede into the paper grain so
+   the final composition is the central pile only. */
+.pebble{
+  position:absolute;
+  left:var(--x); top:var(--y);
+  width:var(--s, 4px); height:var(--s, 4px);
+  border-radius:99px;
+  background:var(--ink-2);
+  opacity: calc(.32 * (1 - var(--gp-settle, 0) * 0.78));
+  transform:
+    translate(-50%,-50%)
+    translate(calc(var(--pull-x, 0px) * var(--gp-pull, 0) * (1 - var(--gp-settle, 0))),
+              calc(var(--pull-y, 0px) * var(--gp-pull, 0) * (1 - var(--gp-settle, 0))))
+    translateY(var(--breath-y, 0px));
+  animation: breathe calc(22s * var(--m-drift,1)) ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  transition: opacity 1s linear;
+}
+.pebble.pebble-soft{
+  background:var(--accent);
+  opacity:.24;
+}
+
+/* the quiet ripple at the gravity point — a soft "you can come back".
+   Once the pile has actually formed (settle high), the ripples fade — the
+   words have already arrived; the calling-back is no longer needed. */
+.garden-ripple{
+  position:absolute;
+  left:var(--x); top:var(--y);
+  width:0; height:0;
+  border:1px solid rgba(42,39,36,.1);
+  border-radius:99px;
+  transform:translate(-50%,-50%);
+  animation: gardenRipple calc(11s * var(--m-drift,1)) ease-out infinite;
+  pointer-events:none;
+  filter: opacity(calc(1 - var(--gp-settle, 0) * 0.88));
+  transition: filter 1.4s linear;
+}
+.garden-ripple.ripple-center{
+  animation-duration: calc(14s * var(--m-drift,1));
+  border-color: rgba(42,39,36,.08);
+}
+.garden-ripple.ripple-faint{
+  animation-delay:-6s;
+  border-color:rgba(42,39,36,.05);
+}
+@keyframes gardenRipple{
+  0%   { width:0; height:0; opacity:0;}
+  18%  { opacity:.55;}
+  100% { width:280px; height:280px; opacity:0;}
+}
+
+/* breath — drives a tiny vertical drift via custom property,
+   so the compound transform on each fragment can read it alongside pull/rotate. */
+@keyframes breathe{
+  0%, 100% { --breath-y: 0px; }
+  50%      { --breath-y: -4px; }
+}
+
+/* The anchor fragment is the still center — it does not pull. Its blur and
+   opacity respond to the ATMOSPHERE signal (the early one), so it comes
+   into focus when the air arrives, just before anything else aligns. */
+.kakera.ka-anchor{
+  filter: blur(calc((1 - var(--gp-atmos, 0)) * 1.2px));
+  opacity: calc(.82 + var(--gp-atmos, 0) * .18);
+  transition: filter .7s linear, opacity .7s linear;
+}
+
+/* Outer fragments — Near, Mid, Far, Paper.
+
+   The dissolve is layered: the OUTLINE (border + shadow + bg alpha) softens
+   first via --edge-dissolve; the FILL (opacity) follows via --dissolve.
+   This is what produces "the outline ribbons off into air" rather than
+   "the card fades out". opacity floor is ~10–14% — a faint residue stays. */
+
+.kakera.ka-near{
+  opacity: calc(
+    (.84 + var(--gp-pull, 0) * .16)
+    * (1 - var(--dissolve, 0) * 0.86)
+  );
+  background: rgba(255, 255, 255,
+    calc((.7 + var(--gp-pull, 0) * .15) * (1 - var(--edge-dissolve, 0) * 0.95))
+  );
+  border-color: rgba(42, 39, 36, calc(.06 * (1 - var(--edge-dissolve, 0))));
+  box-shadow:
+    0 1px 0 rgba(255,255,255, calc(.6 * (1 - var(--edge-dissolve, 0)))) inset,
+    0 14px 30px -22px rgba(42, 39, 36, calc(.22 * (1 - var(--edge-dissolve, 0) * 0.92))),
+    0 calc(var(--gp-pull,0) * 14px) calc(var(--gp-pull,0) * 28px)
+      calc(var(--gp-pull,0) * -18px)
+      rgba(42, 39, 36, calc(var(--gp-pull,0) * .12 * (1 - var(--edge-dissolve, 0))));
+  filter: blur(calc(
+    (1 - var(--gp-pull, 0)) * 0.4px
+    + var(--edge-dissolve, 0) * 2.2px
+    + var(--dissolve, 0) * 2.4px
+  ));
+  transition: filter .8s linear, opacity .8s linear,
+              background .8s linear, border-color .8s linear;
+}
+
+.kakera.ka-mid{
+  opacity: calc(
+    (.78 + var(--gp-pull, 0) * .14)
+    * (1 - var(--dissolve, 0) * 0.88)
+  );
+  background: rgba(255, 255, 255,
+    calc(.62 * (1 - var(--edge-dissolve, 0) * 0.95))
+  );
+  border-color: rgba(42, 39, 36, calc(.06 * (1 - var(--edge-dissolve, 0))));
+  box-shadow:
+    0 1px 0 rgba(255,255,255, calc(.6 * (1 - var(--edge-dissolve, 0)))) inset,
+    0 14px 30px -22px rgba(42, 39, 36, calc(.18 * (1 - var(--edge-dissolve, 0) * 0.92)));
+  filter: blur(calc(
+    var(--edge-dissolve, 0) * 2.4px
+    + var(--dissolve, 0) * 2.4px
+  ));
+  transition: filter .9s linear, opacity .9s linear,
+              background .9s linear, border-color .9s linear;
+}
+
+.kakera.ka-far{
+  opacity: calc(
+    (.76 + var(--gp-pull, 0) * .14)
+    * (1 - var(--dissolve, 0) * 0.9)
+  );
+  background: rgba(255, 255, 255,
+    calc(.48 * (1 - var(--edge-dissolve, 0) * 0.96))
+  );
+  border-color: rgba(42, 39, 36, calc(.05 * (1 - var(--edge-dissolve, 0))));
+  box-shadow:
+    0 1px 0 rgba(255,255,255, calc(.5 * (1 - var(--edge-dissolve, 0)))) inset,
+    0 10px 22px -18px rgba(42, 39, 36, calc(.18 * (1 - var(--edge-dissolve, 0) * 0.92)));
+  filter: blur(calc(
+    var(--edge-dissolve, 0) * 2.6px
+    + var(--dissolve, 0) * 2.8px
+  ));
+  transition: filter 1.1s linear, opacity 1.1s linear,
+              background 1.1s linear, border-color 1.1s linear;
+}
+
+.kakera.ka-paper{
+  opacity: calc((.9) * (1 - var(--dissolve, 0) * 0.92));
+  background: linear-gradient(180deg,
+    rgba(255,255,255, calc(.6 * (1 - var(--edge-dissolve, 0) * 0.92))),
+    rgba(255,255,255, calc(.4 * (1 - var(--edge-dissolve, 0) * 0.92)))
+  );
+  border-color: rgba(42, 39, 36, calc(.05 * (1 - var(--edge-dissolve, 0))));
+  filter: blur(calc(
+    var(--edge-dissolve, 0) * 2px
+    + var(--dissolve, 0) * 2.2px
+  ));
+  transition: filter 1s linear, opacity 1s linear,
+              background 1s linear;
+}
+
+.garden-foot{
+  margin:72px auto 0;
+  text-align:center;
+  font-family:var(--f-min); font-weight:300;
+  font-size:13px; color:var(--ink-2);
+  letter-spacing:.16em;
+  line-height:2;
+}
+.garden-foot span{
+  display:inline-block;
+  padding:0 10px;
+}
+
+/* ─────────────────────────────────────────────────
+   05 — 忘れないためじゃなく。
+   普通のメモには混ぜたくないことばがある、を空気で伝える。
+   左：実用、整っている。右：余白、漂う。比較ではなく "扱うものが違う"。
+   ───────────────────────────────────────────────── */
+.why{
+  background:var(--bg-0);
+  padding:200px 32px 200px;
+}
+.why-title{
+  max-width:var(--maxw); margin:0 auto 100px;
+  text-align:center;
+}
+.why-title h2{
+  font-family:var(--f-min); font-weight:300;
+  font-size:clamp(26px, 3.4vw, 40px);
+  letter-spacing:.06em; line-height:1.9;
+  margin:0; color:var(--ink-0);
+}
+
+.why-pair{
+  max-width:1100px; margin:0 auto;
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap:64px;
+  align-items:start;
+}
+.why-side{
+  margin:0 auto;
+  display:flex; flex-direction:column;
+  gap:36px;
+  align-items:center;
+  width:100%;
+  max-width:420px;
+}
+.why-caption{
+  font-family:var(--f-lat); font-style:italic;
+  font-size:12px; letter-spacing:.24em;
+  color:var(--ink-2);
+  white-space:nowrap;
+}
+.why-side-foot{
+  margin:0;
+  font-family:var(--f-min); font-weight:300;
+  font-size:13px; line-height:2.1;
+  letter-spacing:.06em;
+  color:var(--ink-2);
+  text-align:center;
+  max-width:300px;
+}
+
+/* divider — not a wall, just a breath */
+.why-divider{
+  display:flex; flex-direction:column; align-items:center;
+  gap:18px;
+  align-self:stretch;
+  padding-top:56px; padding-bottom:56px;
+}
+.why-divider-line{
+  flex:1 1 auto;
+  width:1px;
+  background:linear-gradient(180deg, transparent, var(--rule), transparent);
+  min-height:80px;
+}
+.why-divider-glyph{
+  font-family:var(--f-min); font-size:11px;
+  color:var(--ink-3); letter-spacing:.3em;
+}
+
+/* ── LEFT: 日常のメモ ── */
+.memo-page{
+  width:100%;
+  background:#fdfcf8;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:24px 26px 28px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 20px 40px -32px rgba(42,39,36,.18);
+}
+.memo-head{
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:16px;
+}
+.memo-title{
+  font-family:var(--f-jp); font-weight:500;
+  font-size:14px; letter-spacing:.1em;
+  color:var(--ink-0);
+}
+.memo-meta{
+  font-family:var(--f-lat); font-style:italic;
+  font-size:11px; color:var(--ink-2); letter-spacing:.14em;
+}
+.memo-list{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column;
+  gap:12px;
+}
+.memo-item{
+  display:flex; align-items:flex-start; gap:12px;
+  padding:6px 0;
+  border-bottom:1px dotted rgba(42,39,36,.06);
+}
+.memo-item:last-child{border-bottom:0}
+.memo-check{
+  flex:0 0 auto;
+  width:14px; height:14px; margin-top:3px;
+  border:1px solid rgba(42,39,36,.25);
+  border-radius:3px;
+  background:#fff;
+  position:relative;
+}
+.memo-check.checked{
+  background:var(--ink-0);
+  border-color:var(--ink-0);
+}
+.memo-check.checked::after{
+  content:""; position:absolute;
+  left:3px; top:0px; width:5px; height:9px;
+  border:solid var(--bg-0);
+  border-width:0 1.5px 1.5px 0;
+  transform:rotate(45deg);
+}
+.memo-text{
+  font-family:var(--f-jp); font-size:13px;
+  line-height:1.7; color:var(--ink-0);
+  letter-spacing:.02em;
+  word-break:break-all;
+}
+.memo-text.done{
+  color:var(--ink-3); text-decoration:line-through;
+  text-decoration-color:rgba(42,39,36,.3);
+}
+.memo-text.memo-url{
+  font-family:var(--f-mono); font-size:11.5px;
+  color:var(--accent); letter-spacing:0;
+}
+.memo-text.memo-faint{
+  font-family:var(--f-min); font-style:normal;
+  color:var(--ink-2);
+  letter-spacing:.06em;
+}
+
+/* ── RIGHT: Echor field — hand-drawn organic bubbles (echor app trommana) ──
+   warm beige fill, thin tan irregular border, varied sizes, slight overlap.
+   No frame, no card. Each bubble breathes very slightly. */
+.echor-field{
+  position:relative;
+  width:100%;
+  min-height:360px;
+  /* same warm pool as the garden, but smaller, gentler */
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%,
+                    rgba(244, 226, 192, .10),
+                    transparent 75%);
+}
+.echor-blob{
+  position:absolute;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(238, 232, 220, .55);            /* warm cream fill */
+  border: 1.5px solid rgba(176, 152, 116, .42);    /* thin tan outline */
+  color: rgba(106, 92, 78, .82);
+  font-family: var(--f-min);
+  font-weight: 300;
+  letter-spacing: .04em;
+  text-align: center;
+  /* slightly irregular ellipse — different radii in each corner gives the
+     hand-drawn "not quite a circle" feel */
+  border-radius: 56% 48% 52% 50% / 50% 54% 46% 50%;
+  animation: blobBreath 14s ease-in-out infinite;
+}
+.echor-blob span{ padding: 0 8px; line-height: 1.55; }
+
+/* Six bubbles, each with its own size, position, tilt, and breath cadence.
+   Positions overlap slightly so the field reads as a quiet cluster, not a
+   grid. The fill alpha varies a touch per bubble for tonal depth. */
+.echor-blob.blob-1{
+  left: 28%; top: 6%;
+  width: 158px; height: 110px;
+  transform: rotate(-3deg);
+  font-size: 15px;
+  border-radius: 52% 48% 56% 48% / 54% 50% 50% 46%;
+  animation-duration: 16s;
+  animation-delay: -2s;
+}
+.echor-blob.blob-2{
+  left: 72%; top: 18%;
+  width: 132px; height: 102px;
+  transform: rotate(4deg);
+  font-size: 15px;
+  background: rgba(240, 234, 222, .58);
+  border-radius: 54% 50% 48% 52% / 46% 52% 50% 54%;
+  animation-duration: 18s;
+  animation-delay: -7s;
+}
+.echor-blob.blob-3{
+  left: 4%; top: 26%;
+  width: 200px; height: 156px;
+  transform: rotate(-5deg);
+  font-size: 16px;
+  background: rgba(236, 230, 218, .58);
+  border-radius: 50% 54% 46% 52% / 56% 48% 52% 50%;
+  animation-duration: 20s;
+  animation-delay: -4s;
+  z-index: 1;
+}
+.echor-blob.blob-4{
+  left: 36%; top: 38%;
+  width: 244px; height: 174px;
+  transform: rotate(2deg);
+  font-size: 17px;
+  background: rgba(238, 232, 220, .68);
+  border-radius: 48% 52% 50% 52% / 52% 48% 54% 48%;
+  animation-duration: 22s;
+  animation-delay: -10s;
+  z-index: 2;
+}
+.echor-blob.blob-5{
+  left: 14%; top: 76%;
+  width: 76px; height: 56px;
+  transform: rotate(-1deg);
+  font-size: 18px;
+  color: rgba(146, 132, 116, .75);
+  background: rgba(240, 234, 222, .5);
+  border-radius: 50% 48% 54% 50% / 52% 50% 48% 52%;
+  animation-duration: 17s;
+  animation-delay: -12s;
+}
+.echor-blob.blob-6{
+  left: 60%; top: 70%;
+  width: 138px; height: 110px;
+  transform: rotate(3deg);
+  font-size: 15px;
+  background: rgba(240, 234, 222, .58);
+  border-radius: 52% 50% 48% 54% / 48% 54% 50% 50%;
+  animation-duration: 19s;
+  animation-delay: -5s;
+}
+
+@keyframes blobBreath{
+  0%, 100%{ transform: translateY(0)    rotate(var(--bt, 0deg)); }
+  50%    { transform: translateY(-3px) rotate(var(--bt, 0deg)); }
+}
+/* expose each blob's rotation as a custom prop so blobBreath can preserve it */
+.echor-blob.blob-1{ --bt: -3deg; }
+.echor-blob.blob-2{ --bt:  4deg; }
+.echor-blob.blob-3{ --bt: -5deg; }
+.echor-blob.blob-4{ --bt:  2deg; }
+.echor-blob.blob-5{ --bt: -1deg; }
+.echor-blob.blob-6{ --bt:  3deg; }
+
+/* ───────── 05 RELEASE ───────── */
+.release{background:var(--bg-0)}
+.release-grid{
+  max-width:var(--maxw); margin:0 auto;
+  display:flex; flex-direction:column; gap:200px;
+}
+.feature{
+  display:grid; grid-template-columns: 1fr 1fr; gap:80px;
+  align-items:center;
+}
+.feature-rev{direction:rtl}
+.feature-rev > *{direction:ltr}
+
+.kanji{
+  font-family:var(--f-min); font-weight:300;
+  font-size:120px; line-height:1; color:var(--ink-0);
+  letter-spacing:0; margin-bottom:36px;
+  display:flex; align-items:flex-end; gap:6px;
+}
+.kanji span{font-size:36px; color:var(--ink-2); padding-bottom:18px}
+
+.feature-text h3{
+  font-family:var(--f-min); font-weight:300;
+  font-size:clamp(22px, 2.4vw, 30px);
+  line-height:1.7; letter-spacing:.04em;
+  margin:0 0 32px; color:var(--ink-0);
+}
+.feature-text p{
+  font-size:14px; line-height:2.2; color:var(--ink-1);
+  margin:0; max-width:380px;
+}
+
+.feature-phone{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  min-height:560px;
+}
+.phone-glow{
+  position:absolute; inset:30px;
+  background:radial-gradient(ellipse at center, rgba(42,39,36,.06), transparent 60%);
+  filter:blur(20px);
+  z-index:0;
+}
+.phone{
+  position:relative; z-index:1;
+  width:280px; height:560px;
+  background:#0d0c0b;
+  border-radius:38px;
+  padding:8px;
+  box-shadow: 0 30px 60px -30px rgba(42,39,36,.35),
+              0 0 0 1px rgba(42,39,36,.06);
+}
+.phone-notch{
+  position:absolute; left:50%; top:14px; transform:translateX(-50%);
+  width:90px; height:22px; border-radius:99px;
+  background:#0d0c0b; z-index:3;
+}
+.phone-screen{
+  position:relative;
+  width:100%; height:100%;
+  background:var(--bg-0);
+  border-radius:30px;
+  overflow:hidden;
+  padding:38px 18px 18px;
+  display:flex; flex-direction:column;
+}
+
+/* When the phone-screen is just an image (full-bleed app screenshot),
+   drop the padding and let the image fill the rounded screen area. */
+.phone-screen.phone-img{
+  padding: 0;
+}
+.phone-screen.phone-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+/* ───────── 06 AI ERA ───────── */
+.ai-era{
+  background:linear-gradient(180deg, var(--bg-0), var(--bg-1));
+  text-align:center;
+}
+.ai-copy{
+  max-width:var(--readw); margin:0 auto;
+}
+.ai-copy p{
+  font-family:var(--f-min); font-weight:300;
+  font-size:clamp(20px, 2.4vw, 26px);
+  line-height:2.2; letter-spacing:.06em;
+  margin:0 0 32px;
+  color:var(--ink-0);
+}
+.ai-copy p.muted{color:var(--ink-2); font-size:14px; letter-spacing:.3em}
+.ai-divider{
+  margin:80px auto;
+  width:1px; height:80px; position:relative;
+}
+.ai-divider span{
+  position:absolute; left:0; top:0; width:1px; height:100%;
+  background:linear-gradient(180deg, transparent, var(--ink-3), transparent);
+}
+.ai-foot{
+  max-width:520px; margin:0 auto;
+  font-family:var(--f-min); font-size:14px;
+  line-height:2.2; color:var(--ink-1);
+  letter-spacing:.04em;
+}
+
+/* ───────── 07 CLOSING ───────── */
+.closing{
+  background:var(--bg-0);
+  text-align:center;
+  padding:200px 32px 200px;
+  position:relative;
+}
+.closing::before{
+  /* faint ambient ripple */
+  content:""; position:absolute; left:50%; top:50%;
+  width:600px; height:600px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle, var(--bg-1), transparent 60%);
+  z-index:0; opacity:.6;
+}
+.closing-inner{position:relative; z-index:1; max-width:600px; margin:0 auto;}
+.closing-line{
+  font-family:var(--f-min); font-weight:300;
+  letter-spacing:.08em; color:var(--ink-0);
+  margin:0;
+}
+.closing-line.line-1{
+  font-size:clamp(34px, 5vw, 56px);
+  line-height:1.6; margin-bottom:48px;
+}
+.closing-line.line-2{
+  font-size:clamp(18px, 2vw, 22px);
+  line-height:2.1; color:var(--ink-1);
+  margin-bottom:80px;
+}
+
+/* ───────── FOOTER ───────── */
+.foot{
+  border-top:1px solid var(--rule);
+  padding:60px 32px 80px;
+  display:flex; flex-direction:column; align-items:center; gap:24px;
+  background:var(--bg-0);
+}
+.foot-mark{display:flex; align-items:baseline; gap:12px;}
+.foot-meta{
+  display:flex; gap:14px; font-size:11px; color:var(--ink-3);
+  letter-spacing:.16em; font-family:var(--f-lat); font-style:italic;
+}
+.foot-whisper{
+  font-family:var(--f-min); font-size:11px;
+  color:var(--ink-3); letter-spacing:.16em;
+  margin-top:8px;
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 900px){
+  .nav{padding:18px 20px}
+  .nav-links a:not(.nav-cta){display:none}
+  section{padding:120px 22px}
+  .feature{grid-template-columns:1fr; gap:48px}
+  .feature-rev{direction:ltr}
+  .feature-phone{min-height:auto}
+  .section-label{margin-bottom:56px}
+  .garden-field{height:520px}
+  .kakera.ka-anchor{padding:18px 22px}
+  .kakera.ka-anchor p{font-size:15px}
+  .kakera.ka-near p{font-size:13px}
+  .kakera.ka-mid p{font-size:11.5px}
+  .kakera.ka-far p{font-size:11px}
+  .garden-pool{width:380px; height:380px}
+
+  /* Linger — collapse positioning on small screens.
+     Drop the absolute canvas trick; let everything stack naturally. */
+  .linger{ padding: 0 0 60px; }
+  .linger-head{ padding: 100px 22px 0; }
+  .linger-track{ height: auto; padding: 0 22px; margin-top: 40px; }
+  .linger-canvas{ position: static; height: auto; min-height: 0;
+    display: flex; flex-direction: column; gap: 24px; align-items: stretch; }
+  .linger-quote,
+  .linger-memo{
+    position: static;
+    left: auto; top: auto;
+    transform: none;
+    opacity: 1;
+    filter: none;
+    max-width: 100%;
+    width: 100%;
+  }
+  .linger-memo{ align-self: center; min-width: 0; width: auto; }
+
+  .why-pair{
+    grid-template-columns:1fr;
+    gap:48px;
+  }
+  .why-divider{
+    flex-direction:row; padding:0; align-self:center;
+    width:200px; height:auto;
+  }
+  .why-divider-line{
+    width:auto; min-height:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--rule), transparent);
+    flex:1 1 auto;
+  }
+  .why-title{margin-bottom:64px}
+  .echor-field{min-height:280px}
+
+  .kanji{font-size:84px}
+}
+
+/* ───────── MOBILE (≤ 480px) ───────── */
+@media (max-width: 480px){
+  /* Hero */
+  .hero{ padding: 120px 20px 100px; overflow: hidden; }
+  .hero-title{ font-size: 24px; line-height: 1.65; }
+
+  /* Ripple spans animate to 560px wide with negative margins — overflow source.
+     Hero overflow:hidden can't reliably clip transformed descendants in Safari. */
+  .hero-ripple{ display: none; }
+
+  /* Drift texts: white-space:nowrap absolute elements at % positions overflow hero. */
+  .drift-field{ display: none; }
+
+  /* Notify form — stack vertically, constrained to content width */
+  .notify{
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 10px;
+    gap: 8px;
+    width: 100%;
+  }
+  .notify button{
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Nav CTA */
+  .nav-cta{ display: none; }
+}

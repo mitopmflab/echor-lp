@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Echor — ことばの箱庭</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body class="palette-warm">
+
+<template id="__bundler_thumbnail" data-bg-color="#faf8f4">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#faf8f4"/>
+    <g fill="none" stroke="#2a2724" stroke-opacity="0.08">
+      <circle cx="600" cy="400" r="120"/>
+      <circle cx="600" cy="400" r="200"/>
+      <circle cx="600" cy="400" r="280"/>
+    </g>
+    <circle cx="600" cy="400" r="6" fill="#2a2724" fill-opacity="0.6"/>
+    <text x="600" y="540" text-anchor="middle"
+          font-family="Georgia, 'Times New Roman', serif" font-style="italic"
+          font-size="44" fill="#2a2724">Echor</text>
+    <text x="600" y="580" text-anchor="middle"
+          font-family="serif" font-size="14" letter-spacing="6" fill="#8a847a">
+      ことばの箱庭
+    </text>
+  </svg>
+</template>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- HERO -->
+  <!-- ────────────────────────────────────────────── -->
+  <header class="nav" data-screen-label="Nav">
+    <div class="nav-logo">
+      <span class="logo-mark">Echor</span>
+      <span class="logo-sub">ことばの箱庭</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#concept">コンセプト</a>
+      <a href="#release">使い方</a>
+      <a href="#notify" class="nav-cta">通知を受け取る</a>
+    </nav>
+  </header>
+
+  <section class="hero" data-screen-label="01 Hero">
+    <!-- drifting word fragments behind hero -->
+    <div class="drift-field" aria-hidden="true">
+      <span class="drift" style="--x:8%;  --y:18%; --d:24s; --delay:-2s; ">この感情には、まだ名前がない</span>
+      <span class="drift" style="--x:78%; --y:22%; --d:32s; --delay:-9s; ">忘れたくない一行</span>
+      <span class="drift" style="--x:14%; --y:72%; --d:28s; --delay:-5s; ">深夜2:14のメモ</span>
+      <span class="drift" style="--x:82%; --y:78%; --d:36s; --delay:-14s;">何年も忘れられないセリフ</span>
+      <span class="drift" style="--x:46%; --y:88%; --d:30s; --delay:-7s; ">うまく言えないけれど</span>
+      <span class="drift" style="--x:54%; --y:10%; --d:34s; --delay:-12s;">小説の余白に</span>
+    </div>
+
+    <div class="hero-inner reveal">
+      <div class="eyebrow"><span class="dot"></span>iOS Coming Soon</div>
+      <h1 class="hero-title" id="hero-title">見つけたことばを、<br/><span class="quiet">ここに。</span></h1>
+      <p class="hero-sub" id="hero-sub">echorは、まだきれいにまとまっていない断片を残す場所です。</p>
+
+      <form class="notify" id="notify" data-screen-label="Notify">
+        <input type="email" placeholder="you@example.com" aria-label="メールアドレス" />
+        <button type="submit"><span>リリースを知らせてもらう</span><i class="arr">→</i></button>
+      </form>
+      <p class="notify-foot">通知のみ。広告なし、転載なし。</p>
+    </div>
+
+    <div class="hero-ripple" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>scroll</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- 2. ことばは、散らばる — 大事なことばが、日常の実用メモに埋もれていく。
+       通常スクロールの流れの中で 5 秒ほどかけて自然に進行する。
+       sticky / scrolljack / 長時間 pin は使わない。
+       3枚の断片カードは最後まで残るが、覆われて目立たなくなる。
+       解決はこの中で見せず、次の「ことばを、とどめる」セクションへ渡す。 -->
+  <!-- ────────────────────────────────────────────── -->
+  <section id="linger" class="linger" data-screen-label="02 ことばは、散らばる">
+
+    <!-- 入口：見出し + 小さなサブコピー。 大判明朝の3行リードは廃止。 -->
+    <div class="linger-head">
+      <div class="section-label reveal"><i>02</i><span>ことばは、散らばる</span></div>
+      <p class="linger-head-sub reveal">
+        自分にとって大事なことばほど、<br/>
+        散らばっていて、見えなくなってしまう。
+      </p>
+    </div>
+
+    <!-- 軽い sticky のための track 要素。
+         track は約 1.8 ビューポート分の高さを持ち、その内側に
+         sticky な canvas (~85vh) が置かれる。 結果：ユーザーが
+         スクロールしている間、断片カード群はその場に "留められ"、
+         上から実用カードが侵食してくる。 sticky の距離は約 1 ビューポート
+         分のみ — Apple 的な強い pin にはしない。 -->
+    <div class="linger-track">
+      <!-- canvas: sticky で短く留まり、その間に実用カードが侵食する。 -->
+      <div class="linger-canvas">
+
+        <!-- 大事なことばカード3枚：cream paper / 大判明朝 / 柔らかい影。
+             位置・傾き・サイズ・UIは固定。 -->
+        <figure class="linger-quote linger-q1">
+          <blockquote>残されたことばたちは積み重なり、やがてあなたの輪郭になる。</blockquote>
+          <figcaption>— 深夜のメモ</figcaption>
+        </figure>
+
+        <figure class="linger-quote linger-q2">
+          <blockquote>恋人でも夫婦でもなく、わたしたちは兄妹だったらよかったのかもしれないと思った。</blockquote>
+          <figcaption>— 小説の一節</figcaption>
+        </figure>
+
+        <figure class="linger-quote linger-q3">
+          <blockquote>つづけることのできる人だけが、最後まで立っている。</blockquote>
+          <figcaption>— 大切な人にもらったことば</figcaption>
+        </figure>
+
+        <!-- 実用カード：白UI / Noto Sans JP / 無機質 / 生活感。
+             断片カードを "避ける" のではなく "上から覆う" 配置。
+             各断片が 80% 以上覆われるよう、座標は意図的に断片矩形と
+             ほぼ同じ範囲に重ねる。 -->
+
+        <!-- Q1 (left top) を覆う 2 枚 -->
+        <div class="linger-memo" style="--x:4%; --y:10%; --r:-3deg; --w:260px; --appear-at:0.18">
+          <p class="memo-title">買い物リスト</p>
+          <ul class="memo-list">
+            <li>牛乳</li>
+            <li>卵</li>
+            <li>ひき肉</li>
+            <li>にんじん</li>
+            <li>トイレットペーパー</li>
+            <li>洗剤</li>
+          </ul>
+        </div>
+
+        <div class="linger-memo" style="--x:24%; --y:3%; --r:2.5deg; --w:230px; --appear-at:0.30">
+          <p class="memo-title">来週やること</p>
+          <ul class="memo-list">
+            <li>歯医者予約</li>
+            <li>銀行</li>
+            <li>保育園連絡帳</li>
+          </ul>
+        </div>
+
+        <!-- Q2 (center) を覆う 3 枚 -->
+        <div class="linger-memo" style="--x:36%; --y:30%; --r:3deg; --w:250px; --appear-at:0.42">
+          <p class="memo-title">GW旅行メモ</p>
+          <ul class="memo-list">
+            <li>新幹線予約</li>
+            <li>ホテル確認</li>
+            <li>レンタカー手配</li>
+          </ul>
+        </div>
+
+        <div class="linger-memo" style="--x:54%; --y:50%; --r:-2deg; --w:230px; --appear-at:0.54">
+          <p class="memo-title">Wi-Fi変更</p>
+          <ul class="memo-list">
+            <li>SSID変更</li>
+            <li>パスワード更新</li>
+            <li>ルーター返却</li>
+          </ul>
+        </div>
+
+        <div class="linger-memo" style="--x:60%; --y:34%; --r:-1deg; --w:220px; --appear-at:0.62">
+          <p class="memo-title">請求書送付</p>
+          <ul class="memo-list">
+            <li>電気料金確認</li>
+            <li>サブスク一覧</li>
+          </ul>
+        </div>
+
+        <!-- Q3 (right bottom) を覆う 2 枚 -->
+        <div class="linger-memo" style="--x:60%; --y:68%; --r:2deg; --w:240px; --appear-at:0.74">
+          <p class="memo-title">住所更新</p>
+          <ul class="memo-list">
+            <li>マイページ更新</li>
+            <li>免許証住所変更</li>
+            <li>郵便物転送確認</li>
+          </ul>
+        </div>
+
+        <div class="linger-memo" style="--x:74%; --y:78%; --r:-3deg; --w:220px; --appear-at:0.84">
+          <p class="memo-title">解約手続き</p>
+          <ul class="memo-list">
+            <li>電気</li>
+            <li>サブスク 2件</li>
+            <li>クレカ更新</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- 3. CONCEPT — KOTOBA NO HAKONIWA -->
+  <!-- ────────────────────────────────────────────── -->
+  <section id="concept" class="concept" data-screen-label="03 ことばを、とどめる">
+    <div class="section-label reveal"><i>03</i><span>ことばを、とどめる</span></div>
+
+    <div class="concept-copy reveal">
+      <p class="concept-lead">
+        <em>大事なことばだけを</em><br/><em>残す</em>場所。
+      </p>
+    </div>
+
+    <!-- 静かな引力。 散らばっていたことばが、ここに戻ってこられる。 -->
+    <!-- 中心化はしない。けれど、空気の密度がほんの少し中央へ寄る。 -->
+    <div class="garden reveal" aria-hidden="true">
+      <div class="garden-field">
+
+        <!-- 静かな引力点を、空気の濃淡だけで示す -->
+        <div class="garden-pool" aria-hidden="true"></div>
+        <div class="garden-pool garden-pool-warm" aria-hidden="true"></div>
+        <!-- スクロールで微細に立ち上がる、warm light の層 -->
+        <div class="garden-tint" aria-hidden="true"></div>
+
+        <!-- 中央には、最初にここへ置かれていたことば。
+             周囲の断片が、ここへ静かに気配を残しながら馴染んでいく。 -->
+        <!-- 束の奥行き — 外側の断片の気配が薄れていくのと同時に、
+             ここに静かな紙の層が増えていく。 紙ごとに紙質・傾き・微差。 -->
+        <div class="anchor-stack" aria-hidden="true">
+          <span class="stack-sheet stack-1"></span>
+          <span class="stack-sheet stack-2"></span>
+          <span class="stack-sheet stack-3"></span>
+          <span class="stack-sheet stack-4"></span>
+          <span class="stack-sheet stack-5"></span>
+          <span class="stack-sheet stack-6"></span>
+        </div>
+        <div class="kakera ka-anchor"
+             style="--x:49%;--y:54%;--r:-1deg;--d:-2s"
+             data-slot-x="0" data-slot-y="0" data-slot-r="-1">
+          <p>今日は少し、<br/>息がしやすかった。</p>
+        </div>
+
+        <!-- 散らばっていた断片たち。最終的にはすべて、中央のアンカー周辺に積もる。 -->
+        <!-- 移動量は控えめ (60%程度) — “物理的な吸い込み”ではなく、
+             気配が薄れて中央束に馴染んでいく見え方にする。 -->
+        <div class="kakera ka-near"
+             style="--x:18%;--y:76%;--r:2deg;--d:-6s"
+             data-slot-x="-44" data-slot-y="18" data-slot-r="-3">
+          <p>うまく言えない、<br/>ということ。</p>
+        </div>
+        <div class="kakera ka-near"
+             style="--x:78%;--y:32%;--r:-2deg;--d:-9s"
+             data-slot-x="44" data-slot-y="-14" data-slot-r="4">
+          <p>ことばにすると、<br/>壊れそうだった。</p>
+        </div>
+
+        <div class="kakera ka-mid"
+             style="--x:28%;--y:36%;--r:3deg;--d:-4s"
+             data-slot-x="-8" data-slot-y="-32" data-slot-r="-2">
+          <p>帰り道の、匂いだけ覚えてる。</p>
+        </div>
+        <div class="kakera ka-mid"
+             style="--x:72%;--y:74%;--r:-3deg;--d:-12s"
+             data-slot-x="6" data-slot-y="34" data-slot-r="2">
+          <p>あのセリフを、忘れられない。</p>
+        </div>
+
+        <div class="kakera ka-far"
+             style="--x:18%;--y:22%;--r:-2deg;--d:-8s"
+             data-slot-x="-58" data-slot-y="-14" data-slot-r="5">
+          <p>なまえのない、感情。</p>
+        </div>
+        <div class="kakera ka-far"
+             style="--x:94%;--y:14%;--r:2deg;--d:-11s"
+             data-slot-x="62" data-slot-y="-10" data-slot-r="-4">
+          <p>深夜 2:14 のメモ</p>
+        </div>
+
+        <!-- ことばになりきれていない紙片（無言の存在）も、束の縁に積もる。 -->
+        <div class="kakera ka-paper ka-paper-near"
+             style="--x:60%;--y:86%;--r:-4deg;--d:-7s"
+             data-slot-x="-18" data-slot-y="28" data-slot-r="-6"></div>
+        <div class="kakera ka-paper"
+             style="--x:90%;--y:56%;--r:5deg;--d:-10s"
+             data-slot-x="36" data-slot-y="12" data-slot-r="7"></div>
+
+        <!-- 小石たち：中央に密度を寄せる -->
+        <span class="pebble" style="--x:44%;--y:60%;--s:4px;--d:-3s"></span>
+        <span class="pebble" style="--x:52%;--y:62%;--s:3px;--d:-7s"></span>
+        <span class="pebble" style="--x:42%;--y:46%;--s:3px;--d:-4s"></span>
+        <span class="pebble" style="--x:56%;--y:54%;--s:5px;--d:-9s"></span>
+        <span class="pebble pebble-soft" style="--x:50%;--y:74%;--s:4px;--d:-12s"></span>
+        <!-- 外側にも、控えめに -->
+        <span class="pebble" style="--x:24%;--y:78%;--s:3px;--d:-6s"></span>
+        <span class="pebble pebble-soft" style="--x:88%;--y:50%;--s:3px;--d:-5s"></span>
+        <span class="pebble" style="--x:14%;--y:50%;--s:2px;--d:-2s"></span>
+
+        <!-- 中央のひそかな波紋 — 静かな“呼びかけ” -->
+        <div class="garden-ripple ripple-center" style="--x:49%;--y:54%"></div>
+        <div class="garden-ripple ripple-center ripple-faint" style="--x:49%;--y:54%"></div>
+      </div>
+
+      <p class="garden-foot">
+        <span>—  散らばっていた大事なことばが、ここに、静かに積もり、残っていく。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- 4. ことばが、響き合う — なぜEchorという場所が必要なのか -->
+  <!-- ────────────────────────────────────────────── -->
+  <section id="why" class="why" data-screen-label="04 ことばが、響き合う">
+    <div class="section-label reveal"><i>04</i><span>ことばが、響き合う</span></div>
+
+    <div class="why-title reveal">
+      <h2>メモは、書いて残す。<br/>echorは、自分が見えてくる。</h2>
+    </div>
+
+    <div class="why-pair">
+
+      <!-- 左：日常のメモ。役に立つことばが静かに並んでいる -->
+      <figure class="why-side why-memo reveal" style="--delay:120ms">
+        <figcaption class="why-caption">— 日常のメモ</figcaption>
+        <div class="memo-page" aria-hidden="true">
+          <div class="memo-head">
+            <span class="memo-title">メモ</span>
+            <span class="memo-meta">5月18日 · 12 件</span>
+          </div>
+          <ul class="memo-list">
+            <li class="memo-item">
+              <span class="memo-check checked"></span>
+              <span class="memo-text done">牛乳・卵</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text">16:00 デザインレビュー</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text">提案資料 v3 修正確認</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text memo-url">https://example.com/article/5621</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check checked"></span>
+              <span class="memo-text done">明日 ゴミ出し（燃えるゴミ）</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text">Wi-Fi: kaisha-guest / pw 2026</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text">クリーニング 受け取り 土曜</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text">本：『——』読みたい</span>
+            </li>
+            <li class="memo-item">
+              <span class="memo-check"></span>
+              <span class="memo-text memo-faint">深夜 2:14 ……</span>
+            </li>
+          </ul>
+        </div>
+        <p class="why-side-foot">
+          忘れないため書く。<br/>
+          用が済んだら、消していく。
+        </p>
+      </figure>
+
+      <!-- 中央：仕切りではない、ただの呼吸 -->
+      <div class="why-divider reveal" aria-hidden="true">
+        <span class="why-divider-line"></span>
+        <span class="why-divider-glyph">　</span>
+        <span class="why-divider-line"></span>
+      </div>
+
+      <!-- 右：Echor。残り続けてしまうことばだけが、漂っている -->
+      <figure class="why-side why-echor reveal" style="--delay:240ms">
+        <figcaption class="why-caption">— Echor</figcaption>
+        <div class="echor-field" aria-hidden="true">
+          <!-- echorアプリの吹き出しトンマナ — 手描きの有機的なブロブ。
+               warm beige fill、薄く揺らぐ茶色の輪郭、サイズ・位置ばらつき。 -->
+          <div class="echor-blob blob-1"><span>1999年</span></div>
+          <div class="echor-blob blob-2"><span>予祝</span></div>
+          <div class="echor-blob blob-3"><span>半音階的な<br/>眠りの中で</span></div>
+          <div class="echor-blob blob-4"><span>わたしの遊具</span></div>
+          <div class="echor-blob blob-5"><span>…</span></div>
+          <div class="echor-blob blob-6"><span>薬指</span></div>
+        </div>
+        <p class="why-side-foot">
+          消さずに重ねる。<br/>
+          ことばは、少しずつあなたの輪郭になる。
+        </p>
+      </figure>
+    </div>
+
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- 5. 放つ / 響く -->
+  <!-- ────────────────────────────────────────────── -->
+  <section id="release" class="release" data-screen-label="05 使い方">
+    <div class="section-label reveal"><i>05</i><span>使い方</span></div>
+
+    <div class="release-grid">
+
+      <!-- HOUTSU -->
+      <div class="feature reveal">
+        <div class="feature-text">
+          <div class="kanji">放<span>つ</span></div>
+          <h3>ことばを、そっと置く。</h3>
+          <p>
+            完成させなくていい。<br/>
+            まだ名前のつかない感情のまま、<br/>
+            ふっと手放すように、ひとこと残す。
+          </p>
+        </div>
+        <div class="feature-phone">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen phone-img">
+              <img src="images/hanatsu.png" alt="echor アプリ—“放つ”画面" />
+            </div>
+          </div>
+          <div class="phone-glow"></div>
+        </div>
+      </div>
+
+      <!-- HIBIKU -->
+      <div class="feature feature-rev reveal">
+        <div class="feature-text">
+          <div class="kanji">響<span>く</span></div>
+          <h3>過去の断片と、<br/>ふいに再会する。</h3>
+          <p>
+            今日のあなたに、<br/>
+            数か月前の自分が置いた一行が、<br/>
+            静かに浮かびあがる。
+          </p>
+        </div>
+        <div class="feature-phone">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen phone-img">
+              <img src="images/hibiku.png" alt="echor アプリ—“響く”画面" />
+            </div>
+          </div>
+          <div class="phone-glow"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- 6. AI ERA -->
+  <!-- ────────────────────────────────────────────── -->
+  <section class="ai-era" data-screen-label="06 AI時代に">
+    <div class="section-label reveal"><i>06</i><span>AIが完成された文章をつくる時代に</span></div>
+
+    <div class="ai-copy reveal">
+      <p>AIは、<br/>完成された文章を、<br/>速く作ることができる。</p>
+      <p class="muted">だからこそ、</p>
+      <p>
+        まだ、<br/>
+        うまく形にならないものを、<br/>
+        <em>残しておきたくなる。</em>
+      </p>
+    </div>
+
+    <div class="ai-divider reveal"><span></span></div>
+
+    <p class="ai-foot reveal">
+      Echorは、<br/>
+      “成果を出す”ための<br/>
+      アプリではありません。<br/>
+      まだ、<br/>
+      断片でしかないことばを、<br/>
+      静かに置いておくための場所です。
+    </p>
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <!-- 7. CLOSING -->
+  <!-- ────────────────────────────────────────────── -->
+  <section id="notify-bottom" class="closing" data-screen-label="07 Closing">
+    <div class="closing-inner reveal">
+      <p class="closing-line line-1">断片で、いい。</p>
+      <p class="closing-line line-2">まだことばにならないものを、<br/>ここに。</p>
+
+      <form class="notify" id="notify-2">
+        <input type="email" placeholder="you@example.com" aria-label="メールアドレス" />
+        <button type="submit"><span>リリースを知らせてもらう</span><i class="arr">→</i></button>
+      </form>
+      <p class="notify-foot center">App Store ローンチ時に、一度だけお知らせします。</p>
+    </div>
+  </section>
+
+  <footer class="foot" data-screen-label="Footer">
+    <div class="foot-mark">
+      <span class="logo-mark">Echor</span>
+      <span class="logo-sub">ことばの箱庭</span>
+    </div>
+    <div class="foot-meta">
+      <span>© 2026 Echor</span>
+      <span>·</span>
+      <span>Privacy</span>
+      <span>·</span>
+      <span>Contact</span>
+    </div>
+    <div class="foot-whisper">— 今日も、どこかで、誰かの一行が響いている。</div>
+  </footer>
+
+  <script src="motion.js"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="tweaks-app.jsx"></script>
+</body>
+</html>
