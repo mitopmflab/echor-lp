@@ -110,94 +110,93 @@
       <!-- canvas: sticky で短く留まり、その間に実用カードが侵食する。 -->
       <div class="linger-canvas">
 
-        <!-- 大事なことばカード3枚：cream paper / 大判明朝 / 柔らかい影。
-             位置・傾き・サイズ・UIは固定。 -->
-        <figure class="linger-quote linger-q1">
-          <blockquote>残されたことばたちは積み重なり、やがてあなたの輪郭になる。</blockquote>
-          <figcaption>— 深夜のメモ</figcaption>
-        </figure>
+        <!-- グループ1: Q1 + その実用メモ群 -->
+        <div class="linger-group">
+          <figure class="linger-quote linger-q1">
+            <blockquote>残されたことばたちは積み重なり、やがてあなたの輪郭になる。</blockquote>
+            <figcaption>— 深夜のメモ</figcaption>
+          </figure>
 
-        <figure class="linger-quote linger-q2">
-          <blockquote>恋人でも夫婦でもなく、わたしたちは兄妹だったらよかったのかもしれないと思った。</blockquote>
-          <figcaption>— 小説の一節</figcaption>
-        </figure>
+          <div class="linger-memo" style="--x:4%; --y:10%; --r:-3deg; --w:260px; --appear-at:0.18">
+            <p class="memo-title">買い物リスト</p>
+            <ul class="memo-list">
+              <li>牛乳</li>
+              <li>卵</li>
+              <li>ひき肉</li>
+              <li>にんじん</li>
+              <li>トイレットペーパー</li>
+              <li>洗剤</li>
+            </ul>
+          </div>
 
-        <figure class="linger-quote linger-q3">
-          <blockquote>つづけることのできる人だけが、最後まで立っている。</blockquote>
-          <figcaption>— 大切な人にもらったことば</figcaption>
-        </figure>
-
-        <!-- 実用カード：白UI / Noto Sans JP / 無機質 / 生活感。
-             断片カードを "避ける" のではなく "上から覆う" 配置。
-             各断片が 80% 以上覆われるよう、座標は意図的に断片矩形と
-             ほぼ同じ範囲に重ねる。 -->
-
-        <!-- Q1 (left top) を覆う 2 枚 -->
-        <div class="linger-memo" style="--x:4%; --y:10%; --r:-3deg; --w:260px; --appear-at:0.18">
-          <p class="memo-title">買い物リスト</p>
-          <ul class="memo-list">
-            <li>牛乳</li>
-            <li>卵</li>
-            <li>ひき肉</li>
-            <li>にんじん</li>
-            <li>トイレットペーパー</li>
-            <li>洗剤</li>
-          </ul>
+          <div class="linger-memo" style="--x:24%; --y:3%; --r:2.5deg; --w:230px; --appear-at:0.30">
+            <p class="memo-title">来週やること</p>
+            <ul class="memo-list">
+              <li>歯医者予約</li>
+              <li>銀行</li>
+              <li>保育園連絡帳</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="linger-memo" style="--x:24%; --y:3%; --r:2.5deg; --w:230px; --appear-at:0.30">
-          <p class="memo-title">来週やること</p>
-          <ul class="memo-list">
-            <li>歯医者予約</li>
-            <li>銀行</li>
-            <li>保育園連絡帳</li>
-          </ul>
+        <!-- グループ2: Q2 + その実用メモ群 -->
+        <div class="linger-group">
+          <figure class="linger-quote linger-q2">
+            <blockquote>恋人でも夫婦でもなく、わたしたちは兄妹だったらよかったのかもしれないと思った。</blockquote>
+            <figcaption>— 小説の一節</figcaption>
+          </figure>
+
+          <div class="linger-memo" style="--x:36%; --y:30%; --r:3deg; --w:250px; --appear-at:0.42">
+            <p class="memo-title">GW旅行メモ</p>
+            <ul class="memo-list">
+              <li>新幹線予約</li>
+              <li>ホテル確認</li>
+              <li>レンタカー手配</li>
+            </ul>
+          </div>
+
+          <div class="linger-memo" style="--x:54%; --y:50%; --r:-2deg; --w:230px; --appear-at:0.54">
+            <p class="memo-title">Wi-Fi変更</p>
+            <ul class="memo-list">
+              <li>SSID変更</li>
+              <li>パスワード更新</li>
+              <li>ルーター返却</li>
+            </ul>
+          </div>
+
+          <div class="linger-memo" style="--x:60%; --y:34%; --r:-1deg; --w:220px; --appear-at:0.62">
+            <p class="memo-title">請求書送付</p>
+            <ul class="memo-list">
+              <li>電気料金確認</li>
+              <li>サブスク一覧</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Q2 (center) を覆う 3 枚 -->
-        <div class="linger-memo" style="--x:36%; --y:30%; --r:3deg; --w:250px; --appear-at:0.42">
-          <p class="memo-title">GW旅行メモ</p>
-          <ul class="memo-list">
-            <li>新幹線予約</li>
-            <li>ホテル確認</li>
-            <li>レンタカー手配</li>
-          </ul>
-        </div>
+        <!-- グループ3: Q3 + その実用メモ群 -->
+        <div class="linger-group">
+          <figure class="linger-quote linger-q3">
+            <blockquote>つづけることのできる人だけが、最後まで立っている。</blockquote>
+            <figcaption>— 大切な人にもらったことば</figcaption>
+          </figure>
 
-        <div class="linger-memo" style="--x:54%; --y:50%; --r:-2deg; --w:230px; --appear-at:0.54">
-          <p class="memo-title">Wi-Fi変更</p>
-          <ul class="memo-list">
-            <li>SSID変更</li>
-            <li>パスワード更新</li>
-            <li>ルーター返却</li>
-          </ul>
-        </div>
+          <div class="linger-memo" style="--x:60%; --y:68%; --r:2deg; --w:240px; --appear-at:0.74">
+            <p class="memo-title">住所更新</p>
+            <ul class="memo-list">
+              <li>マイページ更新</li>
+              <li>免許証住所変更</li>
+              <li>郵便物転送確認</li>
+            </ul>
+          </div>
 
-        <div class="linger-memo" style="--x:60%; --y:34%; --r:-1deg; --w:220px; --appear-at:0.62">
-          <p class="memo-title">請求書送付</p>
-          <ul class="memo-list">
-            <li>電気料金確認</li>
-            <li>サブスク一覧</li>
-          </ul>
-        </div>
-
-        <!-- Q3 (right bottom) を覆う 2 枚 -->
-        <div class="linger-memo" style="--x:60%; --y:68%; --r:2deg; --w:240px; --appear-at:0.74">
-          <p class="memo-title">住所更新</p>
-          <ul class="memo-list">
-            <li>マイページ更新</li>
-            <li>免許証住所変更</li>
-            <li>郵便物転送確認</li>
-          </ul>
-        </div>
-
-        <div class="linger-memo" style="--x:74%; --y:78%; --r:-3deg; --w:220px; --appear-at:0.84">
-          <p class="memo-title">解約手続き</p>
-          <ul class="memo-list">
-            <li>電気</li>
-            <li>サブスク 2件</li>
-            <li>クレカ更新</li>
-          </ul>
+          <div class="linger-memo" style="--x:74%; --y:78%; --r:-3deg; --w:220px; --appear-at:0.84">
+            <p class="memo-title">解約手続き</p>
+            <ul class="memo-list">
+              <li>電気</li>
+              <li>サブスク 2件</li>
+              <li>クレカ更新</li>
+            </ul>
+          </div>
         </div>
 
       </div>

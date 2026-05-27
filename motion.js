@@ -354,3 +354,56 @@
   window.addEventListener('scroll', compute, { passive: true });
   window.addEventListener('resize', compute);
 })();
+
+// ─────────────────────────────────────────────────
+// Linger mobile fade — 480px 以下のみ動作。
+// 2段階分離演出:
+//   Stage 1) quote が画面に入り始めたら早めにフェードイン
+//            → threshold 0.2 / rootMargin なし（viewport 全体）
+//   Stage 2) quote center が viewport center 付近に来たら memo を起動
+//            → rootMargin -50% + threshold 0.4 で発火
+//            → 900ms 後から 220ms 間隔でカード順次出現
+// Stage 2 の IO は Stage 1 発火後に動的に生成 (per-quote)。
+// ─────────────────────────────────────────────────
+(function setupLingerMobileFade(){
+  if(!window.matchMedia('(max-width: 480px)').matches) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(prefersReduced){
+    document.querySelectorAll('#linger .linger-quote, #linger .linger-memo')
+      .forEach(el => el.classList.add('linger-card-in'));
+    return;
+  }
+
+  // Stage 2: quote が viewport 中央付近に来たら memo を遅延出現させる
+  function armMemoTrigger(quote, group) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(!e.isIntersecting) return;
+        io.unobserve(e.target);
+        group.querySelectorAll('.linger-memo').forEach((memo, i) => {
+          setTimeout(() => memo.classList.add('linger-card-in'), 500 + i * 200);
+        });
+      });
+    }, {
+      rootMargin: '0px 0px -50% 0px',  // effective root = viewport 上半分
+      threshold: 0.4                    // quote center ≈ viewport center で発火
+    });
+    io.observe(quote);
+  }
+
+  // Stage 1: quote が画面に入り始めたら即フェードイン、その後 memo trigger をセット
+  const quoteShowIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      quoteShowIO.unobserve(e.target);
+      e.target.classList.add('linger-card-in');
+
+      const group = e.target.closest('.linger-group');
+      if(group) armMemoTrigger(e.target, group);
+    });
+  }, { threshold: 0.2 });  // 20% 見えたら quote 表示（早め）
+
+  document.querySelectorAll('#linger .linger-quote').forEach(q => quoteShowIO.observe(q));
+})();

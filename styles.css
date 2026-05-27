@@ -56,7 +56,9 @@ body{
   text-rendering:optimizeLegibility;
   line-height:1.85;
   letter-spacing:.02em;
-  overflow-x:hidden;
+  /* overflow-x intentionally removed: any value here creates a scroll container
+     on iOS Safari, making position:fixed body-relative instead of viewport-relative.
+     Horizontal overflow is controlled at section level in the 480px block. */
 }
 
 ::selection{background:rgba(42,39,36,.12);color:var(--ink-0)}
@@ -1599,6 +1601,7 @@ section{
     width: 100%;
   }
   .linger-memo{ align-self: center; min-width: 0; width: auto; }
+  .linger-group{ display: flex; flex-direction: column; gap: 16px; }
 
   .why-pair{
     grid-template-columns:1fr;
@@ -1621,6 +1624,10 @@ section{
 
 /* ───────── MOBILE (≤ 480px) ───────── */
 @media (max-width: 480px){
+  /* Section-level horizontal overflow guard — replaces body overflow-x.
+     clip does not create a scroll container, so position:fixed is unaffected. */
+  section{ overflow-x: clip; }
+
   /* Hero */
   .hero{ padding: 120px 20px 100px; overflow: hidden; }
   .hero-title{ font-size: 24px; line-height: 1.65; }
@@ -1645,6 +1652,80 @@ section{
     justify-content: center;
   }
 
+  /* Nav — glass effect, aligned with PC version.
+     Gradient opacity slightly higher (0.80→0) vs PC (0.85→0) to compensate
+     for denser mobile content, but still fades to transparent at the bottom. */
+  .nav{
+    padding: 14px 20px;
+    background: linear-gradient(180deg, rgba(250,248,244,.80) 55%, rgba(250,248,244,0));
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
   /* Nav CTA */
   .nav-cta{ display: none; }
+
+  /* Linger — memos invade their quote at oblique angles.
+     Layout overlap: margin-top pulls memos into the quote area.
+     Visual tilt: per-card transform (static; card-in only fades opacity).
+     Rotate bleed is clipped by overflow-x:hidden on .linger-track. */
+  .linger-track{ overflow-x: hidden; }
+  .linger-canvas{ gap: 0; }
+  .linger-group{
+    position: relative;
+    margin-bottom: 8px;
+    gap: 0;
+  }
+  .linger-quote{
+    position: relative; z-index: 1;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .linger-memo{
+    position: relative; z-index: 2;
+    margin-top: -110px;           /* layout: memo starts 110px into quote */
+    max-width: 280px; width: calc(100% - 48px);
+    align-self: center;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  /* ── Group 1 (Q1: 残されたことばたち) ── */
+  .linger-group:nth-child(1) .linger-memo:nth-child(2){
+    transform: translateX(-24px) rotate(-6deg);
+  }
+  .linger-group:nth-child(1) .linger-memo:nth-child(3){
+    margin-top: -64px;
+    transform: translateX(34px) translateY(-14px) rotate(7deg);
+  }
+
+  /* ── Group 2 (Q2: 恋人でも) ── */
+  .linger-group:nth-child(2) .linger-memo:nth-child(2){
+    transform: translateX(22px) rotate(5deg);
+  }
+  .linger-group:nth-child(2) .linger-memo:nth-child(3){
+    margin-top: -72px;
+    transform: translateX(-20px) translateY(-12px) rotate(-4deg);
+  }
+  .linger-group:nth-child(2) .linger-memo:nth-child(4){
+    margin-top: -64px;
+    transform: translateX(12px) translateY(-20px) rotate(3deg);
+  }
+
+  /* ── Group 3 (Q3: つづける) ── */
+  .linger-group:nth-child(3) .linger-memo:nth-child(2){
+    transform: translateX(-22px) rotate(-5deg);
+  }
+  .linger-group:nth-child(3) .linger-memo:nth-child(3){
+    margin-top: -70px;
+    transform: translateX(28px) translateY(-16px) rotate(6deg);
+  }
+
+  .linger-quote.linger-card-in,
+  .linger-memo.linger-card-in{ opacity: 1; }
+}
+
+@media (max-width: 480px) and (prefers-reduced-motion: reduce){
+  /* Keep static tilt (that's layout, not animation); only kill transitions */
+  .linger-quote, .linger-memo{ opacity: 1; transition: none; }
 }
