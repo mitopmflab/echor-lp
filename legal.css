@@ -1,0 +1,150 @@
+/* ─────────────────────────────────────────────────────────────
+   legal.css — Privacy Policy / Terms of Use 共通レイアウト
+   styles.css の CSS 変数に依存。必ず styles.css より後に読み込む。
+   ───────────────────────────────────────────────────────────── */
+
+/* ── ページ全体 ── */
+.legal-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 120px 32px 140px;
+}
+
+/* ── ページヘッダー（タイトル＋日付） ── */
+.legal-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.legal-title {
+  font-family: var(--f-lat);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 34px;
+  letter-spacing: .03em;
+  line-height: 1.3;
+  color: var(--ink-0);
+  margin: 0 0 18px;
+}
+
+.legal-date {
+  font-family: var(--f-lat);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: var(--ink-2);
+}
+
+.legal-lead {
+  font-family: var(--f-jp);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 2.1;
+  letter-spacing: .02em;
+  color: var(--ink-1);
+  margin: 28px 0 0;
+}
+
+/* ── セクション ── */
+/* styles.css の section{padding:160px 32px} を上書き */
+.legal-section {
+  padding: 0;
+  margin-top: 52px;
+}
+
+.legal-section:first-of-type {
+  margin-top: 36px;
+}
+
+.legal-section h2 {
+  font-family: var(--f-jp);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: .03em;
+  color: #3a342e;
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.legal-section p {
+  font-family: var(--f-jp);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.75;
+  letter-spacing: .02em;
+  color: var(--ink-1);
+  margin: 0 0 10px;
+}
+
+/* ul 直前の p は小見出し扱い — 本文より一段強く */
+.legal-section p:has(+ ul) {
+  font-weight: 500;
+  color: var(--ink-0);
+}
+
+.legal-section p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section ul {
+  margin: 0 0 10px;
+  padding-left: 1.0em;
+  list-style: disc;
+}
+
+.legal-section ul li {
+  font-family: var(--f-jp);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.75;
+  letter-spacing: .02em;
+  color: var(--ink-1);
+  margin-bottom: 4px;
+}
+
+.legal-section a {
+  color: var(--ink-1);
+  text-decoration: underline;
+  text-decoration-color: rgba(90, 83, 75, .35);
+  text-underline-offset: 3px;
+}
+
+.legal-section a:hover {
+  color: var(--ink-0);
+  text-decoration-color: var(--ink-1);
+}
+
+/* ── nav-logo をリンクにした場合の reset ── */
+a.nav-logo {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── legal ページ内の footer は標準の .foot を使う ── */
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .legal-page {
+    padding: 100px 24px 120px;
+  }
+  .legal-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-page {
+    padding: 88px 20px 100px;
+  }
+  .legal-title {
+    font-size: 24px;
+  }
+  .legal-section h2 {
+    font-size: 16px;
+  }
+  .legal-section p,
+  .legal-section ul li {
+    font-size: 13.5px;
+  }
+}

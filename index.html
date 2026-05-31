@@ -93,10 +93,9 @@
 
     <!-- 入口：見出し + 小さなサブコピー。 大判明朝の3行リードは廃止。 -->
     <div class="linger-head">
-      <div class="section-label reveal"><i>02</i><span>ことばは、散らばる</span></div>
+      <div class="section-label reveal"><i>01</i><span>ことばは、散らばる</span></div>
       <p class="linger-head-sub reveal">
-        自分にとって大事なことばほど、<br/>
-        散らばっていて、見えなくなってしまう。
+        自分にとって大事なことばほど、散らばり見えなくなってしまう。
       </p>
     </div>
 
@@ -207,11 +206,11 @@
   <!-- 3. CONCEPT — KOTOBA NO HAKONIWA -->
   <!-- ────────────────────────────────────────────── -->
   <section id="concept" class="concept" data-screen-label="03 ことばを、とどめる">
-    <div class="section-label reveal"><i>03</i><span>ことばを、とどめる</span></div>
+    <div class="section-label reveal"><i>02</i><span>ことばを、とどめる</span></div>
 
     <div class="concept-copy reveal">
       <p class="concept-lead">
-        <em>大事なことばだけを</em><br/><em>残す</em>場所。
+        散らばっていた大事なことばが、静かに積もり、残っていく。
       </p>
     </div>
 
@@ -304,9 +303,6 @@
         <div class="garden-ripple ripple-center ripple-faint" style="--x:49%;--y:54%"></div>
       </div>
 
-      <p class="garden-foot">
-        <span>—  散らばっていた大事なことばが、ここに、静かに積もり、残っていく。</span>
-      </p>
     </div>
   </section>
 
@@ -314,7 +310,7 @@
   <!-- 4. ことばが、響き合う — なぜEchorという場所が必要なのか -->
   <!-- ────────────────────────────────────────────── -->
   <section id="why" class="why" data-screen-label="04 ことばが、響き合う">
-    <div class="section-label reveal"><i>04</i><span>ことばが、響き合う</span></div>
+    <div class="section-label reveal"><i>03</i><span>ことばが、響き合う</span></div>
 
     <div class="why-title reveal">
       <h2>メモは、書いて残す。<br/>echorは、自分が見えてくる。</h2>
@@ -351,22 +347,6 @@
               <span class="memo-check checked"></span>
               <span class="memo-text done">明日 ゴミ出し（燃えるゴミ）</span>
             </li>
-            <li class="memo-item">
-              <span class="memo-check"></span>
-              <span class="memo-text">Wi-Fi: kaisha-guest / pw 2026</span>
-            </li>
-            <li class="memo-item">
-              <span class="memo-check"></span>
-              <span class="memo-text">クリーニング 受け取り 土曜</span>
-            </li>
-            <li class="memo-item">
-              <span class="memo-check"></span>
-              <span class="memo-text">本：『——』読みたい</span>
-            </li>
-            <li class="memo-item">
-              <span class="memo-check"></span>
-              <span class="memo-text memo-faint">深夜 2:14 ……</span>
-            </li>
           </ul>
         </div>
         <p class="why-side-foot">
@@ -386,14 +366,58 @@
       <figure class="why-side why-echor reveal" style="--delay:240ms">
         <figcaption class="why-caption">— echor</figcaption>
         <div class="echor-field" aria-hidden="true">
-          <!-- echorアプリの吹き出しトンマナ — 手描きの有機的なブロブ。
-               warm beige fill、薄く揺らぐ茶色の輪郭、サイズ・位置ばらつき。 -->
-          <div class="echor-blob blob-1"><span>1999年</span></div>
-          <div class="echor-blob blob-2"><span>予祝</span></div>
-          <div class="echor-blob blob-3"><span>半音階的な<br/>眠りの中で</span></div>
-          <div class="echor-blob blob-4"><span>わたしの遊具</span></div>
-          <div class="echor-blob blob-5"><span>…</span></div>
-          <div class="echor-blob blob-6"><span>薬指</span></div>
+          <!-- SVG dual-path blobs — ported from app WalkthroughScreen Visual3.
+               stroke path: outer organic outline.
+               fill path: translated right+down, blurred (stdDeviation 1.0) — drifts from stroke.
+               Paths: BLOBS[0-4] from echor-app WalkthroughScreen.tsx. -->
+          <div class="echor-blob blob-1">
+            <svg class="blob-svg" viewBox="0 0 232 192" overflow="visible">
+              <defs><filter id="echor-bf1"><feGaussianBlur stdDeviation="1.0"/></filter></defs>
+              <path class="blob-fill" d="M114,24 C154,14 201,44 207,86 C213,128 189,163 153,174 C117,185 68,177 43,151 C18,125 18,83 39,55 C60,27 73,34 114,24 Z" transform="translate(14.8,17)" filter="url(#echor-bf1)"/>
+              <path class="blob-stroke" d="M113,13 C154,4 204,37 210,80 C216,123 192,162 154,174 C116,186 64,175 38,148 C12,121 11,74 34,44 C57,14 70,22 113,13 Z"/>
+            </svg>
+            <span>1999年</span>
+          </div>
+          <div class="echor-blob blob-2">
+            <svg class="blob-svg" viewBox="0 0 238 192" overflow="visible">
+              <defs><filter id="echor-bf2"><feGaussianBlur stdDeviation="1.0"/></filter></defs>
+              <path class="blob-fill" d="M127,18 C170,10 210,42 215,84 C220,126 195,161 159,173 C123,185 72,177 47,151 C22,125 22,83 43,55 C64,27 84,26 127,18 Z" transform="translate(19.4,17)" filter="url(#echor-bf2)"/>
+              <path class="blob-stroke" d="M123,7 C168,0 213,34 220,78 C227,122 200,161 161,173 C122,185 68,175 41,148 C14,121 12,73 36,43 C60,13 76,12 123,7 Z"/>
+            </svg>
+            <span>予祝</span>
+          </div>
+          <div class="echor-blob blob-3">
+            <svg class="blob-svg" viewBox="0 0 240 195" overflow="visible">
+              <defs><filter id="echor-bf3"><feGaussianBlur stdDeviation="1.0"/></filter></defs>
+              <path class="blob-fill" d="M126,22 C170,14 209,46 214,88 C219,130 193,163 156,174 C119,185 66,172 40,146 C14,120 15,78 39,52 C63,26 84,29 126,22 Z" transform="translate(11,17)" filter="url(#echor-bf3)"/>
+              <path class="blob-stroke" d="M124,11 C172,5 214,38 220,80 C226,122 200,161 160,173 C120,185 65,171 38,144 C11,117 10,73 33,45 C58,17 80,18 124,11 Z"/>
+            </svg>
+            <span>半音階的な<br/>眠りの中で</span>
+          </div>
+          <div class="echor-blob blob-4">
+            <svg class="blob-svg" viewBox="0 0 235 195" overflow="visible">
+              <defs><filter id="echor-bf4"><feGaussianBlur stdDeviation="1.0"/></filter></defs>
+              <path class="blob-fill" d="M122,20 C165,12 207,40 213,82 C219,124 198,160 163,174 C128,188 77,178 51,152 C25,126 21,85 42,56 C63,27 79,28 122,20 Z" transform="translate(9,15)" filter="url(#echor-bf4)"/>
+              <path class="blob-stroke" d="M119,9 C164,2 211,34 218,77 C225,120 201,159 163,173 C125,187 72,177 44,150 C16,123 12,76 36,46 C60,16 75,16 119,9 Z"/>
+            </svg>
+            <span>わたしの遊具</span>
+          </div>
+          <div class="echor-blob blob-5">
+            <svg class="blob-svg" viewBox="0 0 232 192" overflow="visible">
+              <defs><filter id="echor-bf5"><feGaussianBlur stdDeviation="1.0"/></filter></defs>
+              <path class="blob-fill" d="M114,24 C154,14 201,44 207,86 C213,128 189,163 153,174 C117,185 68,177 43,151 C18,125 18,83 39,55 C60,27 73,34 114,24 Z" transform="translate(20,17)" filter="url(#echor-bf5)"/>
+              <path class="blob-stroke" d="M113,13 C154,4 204,37 210,80 C216,123 192,162 154,174 C116,186 64,175 38,148 C12,121 11,74 34,44 C57,14 70,22 113,13 Z"/>
+            </svg>
+            <span>…</span>
+          </div>
+          <div class="echor-blob blob-6">
+            <svg class="blob-svg" viewBox="0 0 234 194" overflow="visible">
+              <defs><filter id="echor-bf6"><feGaussianBlur stdDeviation="1.0"/></filter></defs>
+              <path class="blob-fill" d="M120,22 C162,14 205,44 210,86 C215,128 191,163 155,175 C119,187 69,179 44,153 C19,127 18,85 39,57 C60,29 78,30 120,22 Z" transform="translate(16.7,17)" filter="url(#echor-bf6)"/>
+              <path class="blob-stroke" d="M117,11 C161,3 207,36 213,79 C219,122 194,162 156,174 C118,186 65,176 38,149 C11,122 9,74 33,44 C57,14 73,16 117,11 Z"/>
+            </svg>
+            <span>薬指</span>
+          </div>
         </div>
         <p class="why-side-foot">
           消さずに重ねる。<br/>
@@ -408,7 +432,7 @@
   <!-- 5. 放つ / 響く -->
   <!-- ────────────────────────────────────────────── -->
   <section id="release" class="release" data-screen-label="05 使い方">
-    <div class="section-label reveal"><i>05</i><span>使い方</span></div>
+    <div class="section-label reveal"><i>04</i><span>使い方</span></div>
 
     <div class="release-grid">
 
@@ -463,15 +487,15 @@
   <!-- 6. AI ERA -->
   <!-- ────────────────────────────────────────────── -->
   <section class="ai-era" data-screen-label="06 AI時代に">
-    <div class="section-label reveal"><i>06</i><span>AIが完成された文章をつくる時代に</span></div>
+    <div class="section-label reveal"><i>05</i><span>AIが完成された文章をつくる時代に</span></div>
 
     <div class="ai-copy reveal">
       <p>AIは、<br/>完成された文章を、<br/>速く作ることができる。</p>
       <p class="muted">だからこそ、</p>
       <p>
         まだ、<br/>
-        うまく形にならないものを、<br/>
-        <em>残しておきたくなる。</em>
+        <em>うまく形にならないもの</em>を、<br/>
+        残しておきたくなる。
       </p>
     </div>
 
@@ -479,7 +503,7 @@
 
     <p class="ai-foot reveal">
       echorは、<br/>
-      “成果を出す”ための<br/>
+      “課題を解決する”ための<br/>
       アプリではありません。<br/>
       まだ、<br/>
       断片でしかないことばを、<br/>
@@ -511,9 +535,9 @@
     <div class="foot-meta">
       <span>© 2026 echor</span>
       <span>·</span>
-      <span>Privacy</span>
+      <a href="privacy.html">Privacy Policy</a>
       <span>·</span>
-      <span>Contact</span>
+      <a href="terms.html">Terms of Use</a>
     </div>
     <div class="foot-whisper">— 今日も、どこかで、誰かの一行が響いている。</div>
   </footer>
