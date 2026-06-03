@@ -160,7 +160,7 @@ em{font-style:normal;color:var(--ink-0);
   color:var(--ink-1); font-weight:300;
   font-family:var(--f-min);
 }
-.sp-br{ display:none; }
+.sp-block{ display:inline; }
 
 /* ───────── NOTIFY FORM ───────── */
 .notify{
@@ -1628,7 +1628,7 @@ section{
   /* Hero */
   .hero{ padding: 120px 20px 100px; overflow: hidden; }
   .hero-title{ font-size: 28px; line-height: 1.65; }
-  .sp-br{ display: inline; }
+  .sp-block{ display: block; }
 
   /* Ripple spans animate to 560px wide with negative margins — overflow source.
      Hero overflow:hidden can't reliably clip transformed descendants in Safari. */
