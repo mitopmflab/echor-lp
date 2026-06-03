@@ -11,7 +11,7 @@
   const HERO_VARIANTS = {
     a: {
       title: '見つけたことばを、<br/><span class="quiet">ここに。</span>',
-      sub:   'echorは、まだきれいにまとまっていない断片を残す場所です。'
+      sub:   'echorは、まだきれいにまとまっていない<span class="sp-block">断片を残す場所です。</span>'
     },
     b: {
       title: '自分の中に残ったことばを、<br/><span class="quiet">そっと置いておく。</span>',
