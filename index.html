@@ -61,7 +61,8 @@
     <nav class="nav-links">
       <a href="#concept">コンセプト</a>
       <a href="#release">使い方</a>
-      <a href="#notify" class="nav-cta">通知を受け取る</a>
+      <!-- [FORM-HIDDEN] フォーム復活時にこの行の hidden を削除する -->
+      <a href="#notify" class="nav-cta" hidden>通知を受け取る</a>
     </nav>
   </header>
 
@@ -77,15 +78,17 @@
     </div>
 
     <div class="hero-inner reveal">
-      <div class="eyebrow"><span class="dot"></span>iOS Coming Soon</div>
       <h1 class="hero-title" id="hero-title">見つけたことばを、<br/><span class="quiet">ここに。</span></h1>
       <p class="hero-sub" id="hero-sub">echorは、まだきれいにまとまっていない断片を残す場所です。</p>
+      <!-- [FORM-HIDDEN] 代替文言。フォーム復活時に削除する -->
+      <div class="eyebrow"><span class="dot"></span>iOS Coming Soon</div>
 
-      <form class="notify" id="notify" data-screen-label="Notify">
+      <!-- [FORM-HIDDEN] メール登録フォーム。復活時は form・p の style="display:none" を削除し、上の eyebrow を削除する -->
+      <form class="notify" id="notify" data-screen-label="Notify" style="display:none">
         <input type="email" placeholder="you@example.com" aria-label="メールアドレス" />
         <button type="submit"><span>リリースを知らせてもらう</span><i class="arr">→</i></button>
       </form>
-      <p class="notify-foot">通知のみ。広告なし、転載なし。</p>
+      <p class="notify-foot" style="display:none">通知のみ。広告なし、転載なし。</p>
     </div>
 
     <div class="hero-ripple" aria-hidden="true">
@@ -535,11 +538,14 @@
       <p class="closing-line line-1">断片で、いい。</p>
       <p class="closing-line line-2">まだことばにならないものを、<br/>ここに。</p>
 
-      <form class="notify" id="notify-2">
+      <!-- [FORM-HIDDEN] メール登録フォーム。復活時は form・p の hidden 属性を削除し、下の代替文言を削除する -->
+      <form class="notify" id="notify-2" style="display:none">
         <input type="email" placeholder="you@example.com" aria-label="メールアドレス" />
         <button type="submit"><span>リリースを知らせてもらう</span><i class="arr">→</i></button>
       </form>
-      <p class="notify-foot center">App Store ローンチ時に、一度だけお知らせします。</p>
+      <p class="notify-foot center" style="display:none">App Store ローンチ時に、一度だけお知らせします。</p>
+      <!-- [FORM-HIDDEN] 代替文言。フォーム復活時に削除する -->
+      <div class="eyebrow"><span class="dot"></span>iOS Coming Soon</div>
     </div>
   </section>
 
