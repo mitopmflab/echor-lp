@@ -1630,6 +1630,12 @@ section{
   .hero-title{ font-size: 28px; line-height: 1.65; transform: translateX(10px); }
   .sp-block{ display: block; }
 
+  /* Visual centering corrections (letter-spacing trailing space compensation) */
+  .linger-head-sub{ transform: translateX(5px); }
+  .why-title h2{ transform: translateX(8px); }
+  .closing-line.line-1{ transform: translateX(10px); }
+  .closing-line.line-2{ transform: translateX(5px); }
+
   /* Ripple spans animate to 560px wide with negative margins — overflow source.
      Hero overflow:hidden can't reliably clip transformed descendants in Safari. */
   .hero-ripple{ display: none; }
