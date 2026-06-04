@@ -1503,10 +1503,7 @@ section{
   font-family:var(--f-min); font-size:14px;
   line-height:2.2; color:var(--ink-1);
   letter-spacing:.04em;
-  transform:translateX(20px);
-}
-.ai-foot.reveal.is-in{
-  transform:translateX(10px);
+  position:relative; left:10px;
 }
 
 /* ───────── 07 CLOSING ───────── */
