@@ -142,7 +142,6 @@ em{font-style:normal;color:var(--ink-0);
   margin:0 -0.04em 40px 0;
   color:var(--ink-0);
   hanging-punctuation:allow-end;
-  transform:translateX(20px);
 }
 .hero-title .quiet{color:var(--ink-2)}
 .hero-title .ruby{
@@ -1628,7 +1627,7 @@ section{
 
   /* Hero */
   .hero{ padding: 120px 20px 100px; overflow: hidden; }
-  .hero-title{ font-size: 28px; line-height: 1.65; }
+  .hero-title{ font-size: 28px; line-height: 1.65; transform: translateX(10px); }
   .sp-block{ display: block; }
 
   /* Ripple spans animate to 560px wide with negative margins — overflow source.
