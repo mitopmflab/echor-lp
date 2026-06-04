@@ -1505,6 +1505,9 @@ section{
   letter-spacing:.04em;
   transform:translateX(20px);
 }
+.ai-foot.reveal.is-in{
+  transform:translateX(10px);
+}
 
 /* ───────── 07 CLOSING ───────── */
 .closing{
