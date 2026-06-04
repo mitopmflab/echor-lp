@@ -142,6 +142,7 @@ em{font-style:normal;color:var(--ink-0);
   margin:0 -0.04em 40px 0;
   color:var(--ink-0);
   hanging-punctuation:allow-end;
+  transform:translateX(3px);
 }
 .hero-title .quiet{color:var(--ink-2)}
 .hero-title .ruby{
