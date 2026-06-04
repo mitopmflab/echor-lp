@@ -1503,7 +1503,7 @@ section{
   font-family:var(--f-min); font-size:14px;
   line-height:2.2; color:var(--ink-1);
   letter-spacing:.04em;
-  position:relative; left:10px;
+  position:relative; left:7px;
 }
 
 /* ───────── 07 CLOSING ───────── */
