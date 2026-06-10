@@ -98,6 +98,7 @@ a { color: inherit; text-decoration: none; }
   color: #5a534b;
   letter-spacing: 0.06em;
 }
+.tagline-sp { display: none; }
 
 /* ─── Section common ─── */
 .section {
@@ -254,4 +255,8 @@ a { color: inherit; text-decoration: none; }
   .project-name { font-size: 26px; }
 
   .about-en { font-size: 15px; }
+
+  .tagline-pc { display: none; }
+  .tagline-sp { display: block; }
+  .tagline-sp .tl-line { display: block; }
 }
