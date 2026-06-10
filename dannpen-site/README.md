@@ -26,8 +26,7 @@ dannpen の公式サイト。Apple Developer Program 組織登録審査用に作
 - [ ] HTTPS で `https://dannpen.com` にアクセスできる
 - [ ] ナビゲーションリンク（#about / #projects / #contact）が正しくスクロールする
 - [ ] `View echor →` リンクが `https://echor.dannpen.com/` に遷移する
-- [ ] `mito.pmflab@gmail.com` の mailto リンクが動作する
-      ※ `contact@dannpen.com` が用意できた時点でメールアドレスを差し替える
+- [ ] `contact@dannpen.com` の mailto リンクが動作する（Cloudflare Email Routing 経由で転送確認済み）
 - [ ] スマートフォン実機でレイアウトが崩れていない
 - [ ] OGP が SNS シェア時に正しく表示される（og:title / og:description）
 - [ ] `echor.dannpen.com`（echor LP）が影響を受けていないことを確認
@@ -41,10 +40,11 @@ dannpen-site/
   README.md    — このファイル
 ```
 
-## 連絡先の差し替え方
+## 連絡先
 
-`index.html` の以下の箇所を更新する:
+問い合わせ先は `contact@dannpen.com`（Cloudflare Email Routing → 転送先は非公開）。
+`index.html` の該当箇所:
 
 ```html
-<a href="mailto:mito.pmflab@gmail.com" class="contact-email">mito.pmflab@gmail.com</a>
+<a href="mailto:contact@dannpen.com" class="contact-email">contact@dannpen.com</a>
 ```
