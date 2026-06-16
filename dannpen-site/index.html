@@ -122,5 +122,26 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.href || '';
+      var text = a.innerText.trim();
+      if (href.includes('echor.dannpen.com')) {
+        gtag('event', 'click_echor_lp', {
+          app_name: 'echor',
+          link_url: href,
+          link_text: text
+        });
+      }
+      if (href.startsWith('mailto:')) {
+        gtag('event', 'click_contact', {
+          link_url: href,
+          link_text: text
+        });
+      }
+    });
+  </script>
 </body>
 </html>
