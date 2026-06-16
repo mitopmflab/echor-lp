@@ -575,5 +575,38 @@
   <script src="motion.js"></script>
   <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script type="text/babel" src="tweaks-app.jsx"></script>
+  <script>
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.href || '';
+      if (href.includes('apps.apple.com') || href.includes('itunes.apple.com')) {
+        var opensInNewTab = a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey;
+        if (opensInNewTab) {
+          gtag('event', 'click_app_store', {
+            app_name: 'echor',
+            link_url: href,
+            link_text: a.innerText.trim()
+          });
+        } else {
+          e.preventDefault();
+          var hasNavigated = false;
+          function navigateTo() {
+            if (!hasNavigated) {
+              hasNavigated = true;
+              window.location = href;
+            }
+          }
+          gtag('event', 'click_app_store', {
+            app_name: 'echor',
+            link_url: href,
+            link_text: a.innerText.trim(),
+            event_callback: navigateTo
+          });
+          setTimeout(navigateTo, 2000);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
