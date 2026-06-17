@@ -200,6 +200,19 @@ em{font-style:normal;color:var(--ink-0);
   letter-spacing:.1em;
 }
 .notify-foot.center{text-align:center}
+.cta-store{
+  display:inline-flex; align-items:center;
+  background:var(--ink-0); color:var(--bg-0);
+  padding:12px 28px; border-radius:999px;
+  font:inherit; font-size:12px; letter-spacing:.12em;
+  text-decoration:none;
+  transition:background .25s ease;
+}
+.cta-store:hover{background:#000}
+.release-date{
+  margin:14px 0 0; font-size:11px; color:var(--ink-3);
+  letter-spacing:.1em;
+}
 
 /* drifting word fragments behind hero */
 .drift-field{
