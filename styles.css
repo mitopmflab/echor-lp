@@ -162,7 +162,7 @@ em{font-style:normal;color:var(--ink-0);
 }
 .sp-block{ display:inline; }
 .ka-card-text{ margin:0; }
-.ka-card-text span{ display:block; white-space:nowrap; }
+.ka-card-text span{ white-space:nowrap; }
 
 /* ───────── NOTIFY FORM ───────── */
 .notify{
