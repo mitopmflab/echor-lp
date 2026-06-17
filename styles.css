@@ -161,6 +161,7 @@ em{font-style:normal;color:var(--ink-0);
   font-family:var(--f-min);
 }
 .sp-block{ display:inline; }
+.br-sp{ display:none; }
 
 /* ───────── NOTIFY FORM ───────── */
 .notify{
@@ -1643,6 +1644,7 @@ section{
   .hero{ padding: 120px 20px 100px; overflow: hidden; }
   .hero-title{ font-size: 28px; line-height: 1.65; transform: translateX(10px); }
   .sp-block{ display: block; }
+  .br-sp{ display: inline; }
 
   /* Visual centering corrections (letter-spacing trailing space compensation) */
   .linger-head-sub{ transform: translateX(5px); }
