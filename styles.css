@@ -162,6 +162,8 @@ em{font-style:normal;color:var(--ink-0);
 }
 .sp-block{ display:inline; }
 .br-sp{ display:none; }
+.ka-card-text{ margin:0; }
+.ka-card-text span{ display:inline; }
 
 /* ───────── NOTIFY FORM ───────── */
 .notify{
@@ -1645,6 +1647,8 @@ section{
   .hero-title{ font-size: 28px; line-height: 1.65; transform: translateX(10px); }
   .sp-block{ display: block; }
   .br-sp{ display: inline; }
+  .ka-card-text span{ display:block; white-space:nowrap; }
+  .br-pc{ display:none; }
 
   /* Visual centering corrections (letter-spacing trailing space compensation) */
   .linger-head-sub{ transform: translateX(5px); }
