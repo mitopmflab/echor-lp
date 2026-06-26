@@ -215,6 +215,17 @@ em{font-style:normal;color:var(--ink-0);
   margin:14px 0 0; font-size:11px; color:var(--ink-3);
   letter-spacing:.1em;
 }
+/* App Store badge (iOS / PC) */
+.cta-appstore{ display:inline-block; margin-top:24px; }
+.cta-appstore img{ height:44px; display:block; border:0; }
+/* Android CTA */
+.cta-android{ display:none; margin-top:20px; text-align:center; }
+.cta-android-title{ font-size:13px; font-weight:500; letter-spacing:.05em; color:var(--ink-0); margin:0 0 6px; }
+.cta-android-desc{ font-size:11px; color:var(--ink-2); letter-spacing:.08em; margin:0 0 16px; }
+/* is-android: swap CTA visibility */
+.is-android .cta-appstore{ display:none; }
+.is-android .cta-android{ display:block; }
+.is-android .nav-cta{ display:none; }
 
 /* drifting word fragments behind hero */
 .drift-field{
