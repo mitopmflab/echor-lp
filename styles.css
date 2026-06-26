@@ -216,7 +216,7 @@ em{font-style:normal;color:var(--ink-0);
   letter-spacing:.1em;
 }
 /* App Store badge (iOS / PC) */
-.cta-appstore-label{ margin:20px 0 6px; font-size:14px; font-weight:500; color:var(--ink-1); letter-spacing:.04em; }
+.cta-appstore-label{ margin:20px 0 3px; font-size:14px; font-weight:500; color:var(--ink-1); letter-spacing:.04em; }
 .cta-appstore{ display:inline-block; margin-top:0; }
 .cta-appstore img{ height:44px; display:block; border:0; }
 /* Android CTA */
