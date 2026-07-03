@@ -24,7 +24,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css?v=3" />
-<script>if(/Android/i.test(navigator.userAgent))document.documentElement.classList.add('is-android');</script>
+<script>
+(function(){
+  var ua=navigator.userAgent;
+  var isAndroid=/Android/i.test(ua);
+  var isIOS=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(isAndroid)document.documentElement.classList.add('is-android');
+  else if(!isIOS)document.documentElement.classList.add('is-desktop');
+})();
+</script>
 
 <script type="application/ld+json">
 {

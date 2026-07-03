@@ -234,6 +234,8 @@ em{font-style:normal;color:var(--ink-0);
 .is-android .cta-appstore{ display:none; }
 .is-android .cta-android{ display:block; }
 .is-android .nav-cta{ display:none; }
+/* is-desktop: show both iOS (primary) and Android (secondary) CTAs */
+.is-desktop .cta-android{ display:block; margin-top:40px; padding-top:32px; border-top:1px solid var(--rule); }
 
 /* drifting word fragments behind hero */
 .drift-field{
