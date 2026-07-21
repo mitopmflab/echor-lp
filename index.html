@@ -94,7 +94,7 @@
     <nav class="nav-links">
       <a href="#concept">コンセプト</a>
       <a href="#release">使い方</a>
-      <a href="https://apps.apple.com/jp/app/id6771013945" class="nav-cta" target="_blank" rel="noopener noreferrer">App Storeでダウンロード</a>
+      <a href="https://apps.apple.com/jp/app/id6771013945" class="nav-cta" data-link-position="nav" target="_blank" rel="noopener noreferrer">App Storeでダウンロード</a>
     </nav>
   </header>
 
@@ -114,7 +114,7 @@
       <p class="hero-title-sub">アイデアとことばのメモアプリ、echor（エコー）</p>
       <p class="hero-sub" id="hero-sub">echorは、映画のセリフ、本の一節、会話の断片、アイデアの種など、<span class="sp-block">まだきれいにまとまっていないことばを残すメモアプリです。</span></p>
       <p class="cta-appstore-label">iPhoneで無料ダウンロード</p>
-      <a href="https://apps.apple.com/jp/app/id6771013945" class="cta-appstore" target="_blank" rel="noopener noreferrer">
+      <a href="https://apps.apple.com/jp/app/id6771013945" class="cta-appstore" data-link-position="hero" target="_blank" rel="noopener noreferrer">
         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="44" />
       </a>
       <div class="cta-android">
@@ -582,7 +582,7 @@
       <p class="closing-line line-2">まだことばにならないものを、<br/>ここに。</p>
 
       <p class="cta-appstore-label">iPhoneで無料ダウンロード</p>
-      <a href="https://apps.apple.com/jp/app/id6771013945" class="cta-appstore" target="_blank" rel="noopener noreferrer">
+      <a href="https://apps.apple.com/jp/app/id6771013945" class="cta-appstore" data-link-position="closing" target="_blank" rel="noopener noreferrer">
         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="44" />
       </a>
       <div class="cta-android">
@@ -610,37 +610,82 @@
 
   <script src="motion.js"></script>
   <script>
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.href || '';
-      if (href.includes('apps.apple.com') || href.includes('itunes.apple.com')) {
-        var opensInNewTab = a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey;
-        if (opensInNewTab) {
-          gtag('event', 'click_app_store', {
-            app_name: 'echor',
-            link_url: href,
-            link_text: a.innerText.trim()
-          });
-        } else {
-          e.preventDefault();
-          var hasNavigated = false;
-          function navigateTo() {
-            if (!hasNavigated) {
-              hasNavigated = true;
-              window.location = href;
-            }
-          }
-          gtag('event', 'click_app_store', {
-            app_name: 'echor',
-            link_url: href,
-            link_text: a.innerText.trim(),
-            event_callback: navigateTo
-          });
-          setTimeout(navigateTo, 2000);
-        }
+    (function() {
+      var APP_STORE_LINKS_BY_SOURCE = {
+        instagram: 'https://apps.apple.com/app/apple-store/id6771013945?pt=128909057&ct=ig_profile&mt=8',
+        threads: 'https://apps.apple.com/app/apple-store/id6771013945?pt=128909057&ct=threads_profile&mt=8',
+        x: 'https://apps.apple.com/app/apple-store/id6771013945?pt=128909057&ct=x_profile&mt=8',
+        twitter: 'https://apps.apple.com/app/apple-store/id6771013945?pt=128909057&ct=x_profile&mt=8'
+      };
+      var CAMPAIGN_BY_SOURCE = {
+        instagram: 'ig_profile',
+        threads: 'threads_profile',
+        x: 'x_profile',
+        twitter: 'x_profile'
+      };
+      var DEFAULT_APP_STORE_LINK = 'https://apps.apple.com/jp/app/id6771013945';
+      var DEFAULT_APP_STORE_CAMPAIGN = 'organic';
+
+      var params = new URLSearchParams(window.location.search);
+      var utmSource = params.get('utm_source') || '';
+      var utmMedium = params.get('utm_medium') || '';
+      var utmCampaign = params.get('utm_campaign') || '';
+      var utmContent = params.get('utm_content') || '';
+      var utmSourceKey = utmSource.toLowerCase();
+
+      var resolvedHref = APP_STORE_LINKS_BY_SOURCE[utmSourceKey] || DEFAULT_APP_STORE_LINK;
+      var appStoreCampaign = CAMPAIGN_BY_SOURCE[utmSourceKey] || DEFAULT_APP_STORE_CAMPAIGN;
+
+      document.querySelectorAll('a[href*="apps.apple.com"], a[href*="itunes.apple.com"]').forEach(function(a) {
+        a.href = resolvedHref;
+      });
+
+      function getLinkText(a) {
+        var text = (a.innerText || '').trim();
+        if (text) return text;
+        var ariaLabel = (a.getAttribute('aria-label') || '').trim();
+        if (ariaLabel) return ariaLabel;
+        var img = a.querySelector('img');
+        var alt = img ? (img.alt || '').trim() : '';
+        if (alt) return alt;
+        return 'App Store';
       }
-    });
+
+      document.addEventListener('click', function(e) {
+        var a = e.target.closest('a');
+        if (!a) return;
+        var href = a.href || '';
+        if (href.includes('apps.apple.com') || href.includes('itunes.apple.com')) {
+          var eventParams = {
+            app_name: 'echor',
+            link_url: href,
+            link_text: getLinkText(a),
+            link_position: a.getAttribute('data-link-position') || '',
+            app_store_campaign: appStoreCampaign,
+            utm_source: utmSource,
+            utm_medium: utmMedium,
+            utm_campaign: utmCampaign,
+            utm_content: utmContent
+          };
+          var opensInNewTab = a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey;
+          if (opensInNewTab) {
+            gtag('event', 'click_app_store', eventParams);
+          } else {
+            e.preventDefault();
+            var hasNavigated = false;
+            function navigateTo() {
+              if (!hasNavigated) {
+                hasNavigated = true;
+                window.location = href;
+              }
+            }
+            eventParams.event_callback = navigateTo;
+            gtag('event', 'click_app_store', eventParams);
+            setTimeout(navigateTo, 2000);
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
