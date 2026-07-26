@@ -202,6 +202,12 @@ a { color: inherit; text-decoration: none; }
   border-color: #2a2724;
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+}
+
 /* ─── Contact ─── */
 .contact-lead {
   font-size: 14px;
