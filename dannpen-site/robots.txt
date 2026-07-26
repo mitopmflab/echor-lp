@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dannpen.com/sitemap.xml
