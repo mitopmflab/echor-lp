@@ -11,6 +11,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://echor.dannpen.com/privacy/zh-hans" />
 <link rel="alternate" hreflang="zh-Hant" href="https://echor.dannpen.com/privacy/zh-hant" />
 <link rel="alternate" hreflang="ko" href="https://echor.dannpen.com/privacy/ko" />
+<link rel="alternate" hreflang="fr" href="https://echor.dannpen.com/privacy/fr" />
 <link rel="alternate" hreflang="x-default" href="https://echor.dannpen.com/privacy" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
@@ -20,14 +21,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../styles.css" />
 <link rel="stylesheet" href="../legal.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNYXX8JD79"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SNYXX8JD79');
-</script>
 </head>
 <body class="palette-warm">
 
@@ -51,8 +44,9 @@
         <a href="/privacy/zh-hans">简体中文</a>
         <a href="/privacy/zh-hant">繁體中文</a>
         <a href="/privacy/ko">한국어</a>
+        <a href="/privacy/fr">Français</a>
       </nav>
-      <p class="legal-date">Last updated: July 22, 2026</p>
+      <p class="legal-date">Last updated: August 27, 2026</p>
       <p class="legal-translation-notice">
         This page is a translation of the Japanese version. In the event of any discrepancy between this translation and the Japanese version, the Japanese version shall prevail.
       </p>
@@ -101,6 +95,9 @@
         <li>Maintaining stable service operation</li>
       </ul>
       <p>This App does not use the content of the words or Notes you input for advertising, usage analysis, quality improvement, or issue analysis purposes.</p>
+      <p>
+        For Firebase Analytics, in the EU/EEA and certain other regions, collection does not begin until you have given explicit permission. See "4. Regarding External Services" below for details.
+      </p>
     </section>
 
     <section class="legal-section">
@@ -126,17 +123,36 @@
     <section class="legal-section">
       <h2>4. Regarding External Services</h2>
       <p>This App uses Firebase Analytics and Firebase Crashlytics for quality improvement and usage analysis.</p>
-      <p>These services may collect usage information, crash information, device information, and the like.</p>
+
+      <p>Regarding Firebase Analytics</p>
+      <p>
+        In the EU/EEA, and in other regions we treat as "consent regions" for implementation purposes, Firebase Analytics collection is kept OFF until you give explicit permission. Granting and declining permission are presented with the same level of ease, and declining does not restrict any feature of this App. You can change your permission setting at any time afterward from Settings within the App. If you withdraw your consent, Analytics collection stops from that point onward.
+      </p>
+      <p>
+        In regions that are not treated as consent regions, Analytics may be enabled by default unless an explicit prior refusal has been recorded. To determine whether a consent region applies, this App uses the device's region setting — not the App's language setting — as a signal for implementation purposes. This signal does not conclusively establish your legal place of residence.
+      </p>
       <p>Information that may be collected:</p>
       <ul>
-        <li>App usage</li>
-        <li>Screen view events</li>
-        <li>OS information</li>
-        <li>Device type</li>
-        <li>App version</li>
-        <li>Notification setting change events</li>
-        <li>Crash information, etc.</li>
+        <li>Approximate (coarse, country/region-level) geographic information derived by Google</li>
+        <li>Device and app instance identifiers</li>
+        <li>Product interaction within the App</li>
+        <li>Screen and feature usage</li>
+        <li>Other usage data</li>
+        <li>OS information, device type, and App version</li>
+        <li>App usage metrics aggregated within a fixed, predefined range</li>
       </ul>
+      <p>
+        The Firebase (GA4) property's user-level and event-level data retention period is set to 14 months, and this period is configured to reset whenever new activity is recorded for a given user. Google's standard aggregate processing may be subject to separate retention rules, so this does not mean that all Analytics data related to this App is guaranteed to be deleted after 14 months.
+      </p>
+
+      <p>Regarding Firebase Crashlytics</p>
+      <p>
+        Firebase Crashlytics is used, independently of your Analytics permission setting, to obtain crash and reliability diagnostic information. This App does not set a custom user identifier for Crashlytics. Custom keys and logs sent to Crashlytics are limited to predetermined operational information, and we do not intentionally send the text of your words, Notes, or other free-form text. However, crash occurrences, diagnostic information, and device/app information may be processed.
+      </p>
+      <p>
+        According to Firebase's official documentation, crash stack traces and associated identifiers are retained for 90 days before removal begins. This App currently keeps the Crash Insights feature intentionally enabled; through this feature, crash information may be compared against crash data from other apps using Firebase for the purpose of anonymized, aggregated crash-trend analysis.
+      </p>
+
       <p>
         This App does not send personally identifiable information, such as your name or email address, to Firebase.
       </p>
@@ -200,7 +216,27 @@
     </section>
 
     <section class="legal-section">
-      <h2>10. Information Obtained through Inquiries, Registration for Updates, etc.</h2>
+      <h2>10. For Users in the EEA / France and Other Regions</h2>
+      <p>
+        If you are located in the EEA (European Economic Area), France, or another such region, please note the following.
+      </p>
+      <ul>
+        <li>You can withdraw your Analytics consent at any time. Withdrawal does not affect the lawfulness of processing carried out before the withdrawal.</li>
+        <li>Under applicable data protection law, you may have rights of access, rectification, erasure, restriction of processing, objection, and data portability regarding your information.</li>
+        <li>If you reside in France, you may lodge a complaint with the CNIL (Commission Nationale de l'Informatique et des Libertés).</li>
+        <li>Inquiries regarding this Policy and the handling of your information continue to be accepted through "Feedback" within the App.</li>
+        <li>Service providers such as Google/Firebase may process information outside Japan, including outside the EEA. In such cases, the processing is subject to applicable contractual and legal safeguards (such as standard contractual clauses).</li>
+      </ul>
+      <p>
+        Our handling of Analytics in the EEA is based on your consent as the legal basis. Our handling of crash and reliability information may be based on our legitimate interests in maintaining the stable operation and security of this App; however, this does not mean that other legal requirements, such as consent, are uniformly unnecessary as a result.
+      </p>
+      <p>
+        The appointment of an EU representative under Article 27 of the GDPR has not yet been determined at this time. This page does not represent that such a representative exists.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>11. Information Obtained through Inquiries, Registration for Updates, etc.</h2>
       <p>
         We may obtain your email address, the content you submit, and other information you send us through inquiries, registration for various forms of information, surveys, and the like.
       </p>
@@ -215,13 +251,13 @@
     </section>
 
     <section class="legal-section">
-      <h2>11. Changes to this Policy</h2>
+      <h2>12. Changes to this Policy</h2>
       <p>This Policy may be changed as necessary.</p>
       <p>Any changes will take effect from the time the revised content is posted on this page.</p>
     </section>
 
     <section class="legal-section">
-      <h2>12. Contact</h2>
+      <h2>13. Contact</h2>
       <p>
         For inquiries regarding this Policy, please contact us through "Feedback" within the App.
       </p>

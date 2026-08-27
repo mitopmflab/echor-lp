@@ -11,6 +11,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://echor.dannpen.com/privacy/zh-hans" />
 <link rel="alternate" hreflang="zh-Hant" href="https://echor.dannpen.com/privacy/zh-hant" />
 <link rel="alternate" hreflang="ko" href="https://echor.dannpen.com/privacy/ko" />
+<link rel="alternate" hreflang="fr" href="https://echor.dannpen.com/privacy/fr" />
 <link rel="alternate" hreflang="x-default" href="https://echor.dannpen.com/privacy" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
@@ -20,14 +21,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../styles.css" />
 <link rel="stylesheet" href="../legal.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNYXX8JD79"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SNYXX8JD79');
-</script>
 </head>
 <body class="palette-warm">
 
@@ -51,8 +44,9 @@
         <a href="/privacy/zh-hans">简体中文</a>
         <a href="/privacy/zh-hant" aria-current="page">繁體中文</a>
         <a href="/privacy/ko">한국어</a>
+        <a href="/privacy/fr">Français</a>
       </nav>
-      <p class="legal-date">最後更新日期：2026年7月22日</p>
+      <p class="legal-date">最後更新日期：2026年8月27日</p>
       <p class="legal-translation-notice">
         本頁為日文版的翻譯。如翻譯內容與日文版有差異，以日文版為準。
       </p>
@@ -101,6 +95,9 @@
         <li>維持服務穩定運作</li>
       </ul>
       <p>本應用程式不會將使用者輸入的文字或筆記內容，用於廣告、使用狀況分析、品質改善或問題分析。</p>
+      <p>
+        關於 Firebase Analytics，在歐盟／歐洲經濟區（EU/EEA）及其他特定地區，於使用者明確許可之前不會開始收集。詳情請參閱下方「4. 關於外部服務」。
+      </p>
     </section>
 
     <section class="legal-section">
@@ -126,17 +123,36 @@
     <section class="legal-section">
       <h2>4. 關於外部服務</h2>
       <p>本應用程式為改善品質及分析使用狀況，使用 Firebase Analytics 及 Firebase Crashlytics。</p>
-      <p>這些服務可能會收集使用狀況資訊、當機資訊、裝置資訊等。</p>
+
+      <p>關於 Firebase Analytics</p>
+      <p>
+        在歐盟／歐洲經濟區（EU/EEA），以及在實作上視為「需徵得同意地區」的其他地區，Firebase Analytics 的收集功能在使用者明確許可之前將保持關閉。許可與拒絕的操作方式相同，即使選擇拒絕，本應用程式的功能也不會受到限制。許可設定之後可隨時於應用程式內的「設定（Settings）」中變更。撤回同意後，Analytics 的收集將隨即停止。
+      </p>
+      <p>
+        在不屬於需徵得同意地區的地區，若先前未確認存在明確拒絕，Analytics 可能會被啟用。在判斷是否屬於需徵得同意地區時，本應用程式於實作上使用裝置的地區設定，而非 App 的語言設定作為訊號。此訊號並不能確定使用者的法定居住地。
+      </p>
       <p>可能收集的資訊：</p>
       <ul>
-        <li>應用程式使用狀況</li>
-        <li>畫面顯示事件</li>
-        <li>OS 資訊</li>
-        <li>裝置類型</li>
-        <li>應用程式版本</li>
-        <li>通知設定變更事件</li>
-        <li>當機資訊等</li>
+        <li>由 Google 推算之大致（國家／地區層級）地理位置資訊</li>
+        <li>裝置及應用程式執行個體的識別碼</li>
+        <li>應用程式內的操作內容</li>
+        <li>畫面及功能的使用狀況</li>
+        <li>其他使用狀況資料</li>
+        <li>OS 資訊、裝置類型、應用程式版本</li>
+        <li>在預先固定範圍內彙整的應用程式使用指標</li>
       </ul>
+      <p>
+        Firebase（GA4）資源中使用者層級及事件層級的資料保留期限設定為 14 個月，且設定為當該使用者出現新活動時即重設保留期限。由於 Google 方面的標準彙整處理可能適用另一套保留規則，因此不代表與本應用程式相關的所有 Analytics 資料必定會在 14 個月內刪除。
+      </p>
+
+      <p>關於 Firebase Crashlytics</p>
+      <p>
+        Firebase Crashlytics 獨立於 Analytics 的許可／拒絕設定，用於取得當機及品質、穩定性相關的診斷資訊。本應用程式不會為 Crashlytics 設定自訂使用者識別碼。傳送至 Crashlytics 的自訂金鑰與記錄僅限於預先設定的營運相關資訊，不會刻意傳送文字、筆記內容等自由輸入文字。惟當機發生狀況、診斷資訊、裝置／應用程式相關資訊等仍可能被處理。
+      </p>
+      <p>
+        根據 Firebase 官方說明，當機堆疊追蹤及相關識別碼於取得後保留 90 天，其後開始刪除。本應用程式目前刻意保持啟用 Crash Insights 功能，透過此功能，為進行匿名化、彙整化的當機趨勢分析，可能會將當機資訊與使用 Firebase 之其他應用程式的當機資訊進行比較。
+      </p>
+
       <p>
         本應用程式不會將姓名、電子郵件地址等可直接識別個人的資訊傳送給 Firebase。
       </p>
@@ -200,7 +216,27 @@
     </section>
 
     <section class="legal-section">
-      <h2>10. 透過聯絡、資訊登記等方式取得的資訊</h2>
+      <h2>10. 致歐洲經濟區（EEA）／法國等地區的使用者</h2>
+      <p>
+        若您位於歐洲經濟區（EEA）、法國或其他相關地區，請留意以下事項。
+      </p>
+      <ul>
+        <li>關於 Analytics 的同意，您可隨時撤回。撤回不影響撤回前已進行處理的合法性。</li>
+        <li>依適用之資料保護法令，使用者可能就自身資訊享有存取、更正、刪除、限制處理、異議及資料可攜等權利。</li>
+        <li>居住於法國的使用者，可向 CNIL（法國資訊與自由委員會）提出申訴。</li>
+        <li>有關本政策及使用者資訊處理之詢問，仍透過應用程式內的「意見與建議」受理。</li>
+        <li>Google／Firebase 等服務提供者可能會在日本境外（包括 EEA 境外）處理資訊，此情形將適用相應之契約及法律保護措施（如標準契約條款等）。</li>
+      </ul>
+      <p>
+        本應用程式於 EEA 境內對 Analytics 之處理，係以使用者之同意作為法律依據。至於當機與穩定性相關資訊之處理，可能係以維持本應用程式穩定運作及安全性之正當利益（legitimate interests）為依據，惟此並不代表因此即一律無需取得同意等其他法律要求。
+      </p>
+      <p>
+        另，關於依《一般資料保護規則》（GDPR）第 27 條選任歐盟代表一事，目前尚未確定。本頁面不表示存在該代表。
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>11. 透過聯絡、資訊登記等方式取得的資訊</h2>
       <p>
         營運者可能會透過聯絡、各類資訊登記、問卷調查等方式，取得電子郵件地址、輸入內容及其他由使用者傳送的資訊。
       </p>
@@ -215,13 +251,13 @@
     </section>
 
     <section class="legal-section">
-      <h2>11. 本政策的變更</h2>
+      <h2>12. 本政策的變更</h2>
       <p>本政策可能會視需要進行變更。</p>
       <p>變更後的內容自刊登於本頁面時起生效。</p>
     </section>
 
     <section class="legal-section">
-      <h2>12. 聯絡方式</h2>
+      <h2>13. 聯絡方式</h2>
       <p>
         如對本政策有任何疑問，請透過應用程式內的「意見與建議」與營運者聯絡。
       </p>
