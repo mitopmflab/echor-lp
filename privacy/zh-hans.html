@@ -11,6 +11,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://echor.dannpen.com/privacy/zh-hans" />
 <link rel="alternate" hreflang="zh-Hant" href="https://echor.dannpen.com/privacy/zh-hant" />
 <link rel="alternate" hreflang="ko" href="https://echor.dannpen.com/privacy/ko" />
+<link rel="alternate" hreflang="fr" href="https://echor.dannpen.com/privacy/fr" />
 <link rel="alternate" hreflang="x-default" href="https://echor.dannpen.com/privacy" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
@@ -20,14 +21,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../styles.css" />
 <link rel="stylesheet" href="../legal.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNYXX8JD79"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SNYXX8JD79');
-</script>
 </head>
 <body class="palette-warm">
 
@@ -51,8 +44,9 @@
         <a href="/privacy/zh-hans" aria-current="page">简体中文</a>
         <a href="/privacy/zh-hant">繁體中文</a>
         <a href="/privacy/ko">한국어</a>
+        <a href="/privacy/fr">Français</a>
       </nav>
-      <p class="legal-date">最终更新日期：2026年7月22日</p>
+      <p class="legal-date">最终更新日期：2026年8月28日</p>
       <p class="legal-translation-notice">
         本页面为日文版的翻译。如翻译版与日文版存在差异，以日文版为准。
       </p>
@@ -101,6 +95,9 @@
         <li>稳定的服务运营</li>
       </ul>
       <p>本应用不会将用户输入的词句或笔记内容用于广告、使用状况分析、质量改善或故障分析目的。</p>
+      <p>
+        关于Firebase Analytics，在欧盟/欧洲经济区（EU/EEA）及其他一定地区，在用户明确许可之前不会开始收集。详情请参阅下方「4. 关于外部服务」。
+      </p>
     </section>
 
     <section class="legal-section">
@@ -126,17 +123,36 @@
     <section class="legal-section">
       <h2>4. 关于外部服务</h2>
       <p>本应用为提升质量及分析使用状况，使用了Firebase Analytics及Firebase Crashlytics。</p>
-      <p>这些服务可能会收集使用状况信息、崩溃信息、设备信息等。</p>
+
+      <p>关于Firebase Analytics</p>
+      <p>
+        在欧盟/欧洲经济区（EU/EEA），以及在实现上被视为「需征得同意地区」的其他地区，Firebase Analytics的收集功能在用户明确许可之前将保持关闭。许可与拒绝的操作方式相同，即使拒绝，本应用的功能也不会受到限制。许可设置之后可随时在应用内的「设置（Settings）」中变更。撤回同意后，Analytics的收集将随即停止。
+      </p>
+      <p>
+        在不属于需征得同意地区的地区，若此前未确认存在明确拒绝，Analytics可能会被启用。在判断是否属于需征得同意地区时，本应用在实现上使用的是设备的地区设置，而非App的语言设置作为信号。该信号并不能确定用户的法定居住地。
+      </p>
       <p>可能收集的信息：</p>
       <ul>
-        <li>应用使用状况</li>
-        <li>画面显示事件</li>
-        <li>OS信息</li>
-        <li>设备类型</li>
-        <li>应用版本</li>
-        <li>通知设置变更事件</li>
-        <li>崩溃信息等</li>
+        <li>由Google推算的大致（国家/地区级别）地理位置信息</li>
+        <li>设备及应用实例识别符</li>
+        <li>应用内的操作内容</li>
+        <li>画面及功能的使用状况</li>
+        <li>其他使用状况数据</li>
+        <li>OS信息、设备类型、应用版本</li>
+        <li>在预先固定范围内汇总的应用使用指标</li>
       </ul>
+      <p>
+        Firebase（GA4）媒体资源中用户级别及事件级别的数据保留期限设定为14个月，且设定为在该用户出现新活动时重置保留期限。由于Google方面的标准汇总处理可能适用另外的保留规则，因此不能保证与本应用相关的所有Analytics数据必定在14个月内删除。
+      </p>
+
+      <p>关于Firebase Crashlytics</p>
+      <p>
+        Firebase Crashlytics独立于Analytics的许可/拒绝设置，用于获取崩溃及品质、稳定性相关的诊断信息。本应用不会为Crashlytics设置自定义用户识别符。发送至Crashlytics的自定义键和日志仅限于预先设定的运营相关信息，不会有意发送词句、笔记正文等自由文本内容。但崩溃发生情况、诊断信息、设备/应用相关信息等可能会被处理。
+      </p>
+      <p>
+        根据Firebase官方说明，崩溃堆栈跟踪及相关识别符在获取后保留90天，此后开始删除。本应用目前有意保持启用Crash Insights功能，通过该功能，为进行匿名化、汇总化的崩溃趋势分析，可能会将崩溃信息与使用Firebase的其他应用的崩溃信息进行比较。
+      </p>
+
       <p>
         本应用不会将姓名、电子邮件地址等可直接识别个人的信息发送给Firebase。
       </p>
@@ -146,6 +162,15 @@
       <p>
         Google的隐私政策：<br/>
         <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+      </p>
+
+      <p>网站访问分析</p>
+      <p>
+        echor网站使用Cloudflare Web Analytics，以了解页面浏览量和流量来源趋势。根据Cloudflare官方文档，Cloudflare Web Analytics不会收集或使用访问者的个人数据，也不会使用Cookie、localStorage等客户端状态来衡量使用情况。
+      </p>
+      <p>
+        Cloudflare的隐私政策：<br/>
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">https://www.cloudflare.com/privacypolicy/</a>
       </p>
     </section>
 
@@ -200,7 +225,24 @@
     </section>
 
     <section class="legal-section">
-      <h2>10. 通过咨询、通知登记等获取的信息</h2>
+      <h2>10. 致欧洲经济区（EEA）／法国等地区的用户</h2>
+      <p>
+        若您位于欧洲经济区（EEA）、法国或其他相关地区，请留意以下事项。
+      </p>
+      <ul>
+        <li>关于Analytics的同意，您可随时撤回。撤回不影响撤回前已进行处理的合法性。</li>
+        <li>根据适用的数据保护法令，用户可能就自身信息享有访问、更正、删除、限制处理、异议及数据可携带等权利。</li>
+        <li>居住在法国的用户，可向CNIL（法国信息与自由委员会）提出申诉。</li>
+        <li>关于本政策及用户信息处理的咨询，仍通过应用内的「意见反馈」或本政策末尾所列的联系邮箱受理。</li>
+        <li>Google／Firebase等服务提供商可能会在日本境外（包括EEA境外）处理信息，此种情况下将适用相应的合同及法律保护措施（如标准合同条款等）。</li>
+      </ul>
+      <p>
+        本应用在EEA境内对Analytics的处理以用户的同意作为法律依据。对于崩溃及稳定性相关信息的处理，可能以维持本应用稳定运营及安全性的正当利益（legitimate interests）为依据，但这并不意味着因此一律无需征得同意等其他法律要求。
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>11. 通过咨询、通知登记等获取的信息</h2>
       <p>
         我方可能会通过咨询、各类通知登记、问卷调查等，获取用户的电子邮件地址、输入内容及其他用户发送的信息。
       </p>
@@ -215,16 +257,18 @@
     </section>
 
     <section class="legal-section">
-      <h2>11. 本政策的变更</h2>
+      <h2>12. 本政策的变更</h2>
       <p>本政策可能会根据需要进行变更。</p>
       <p>变更后的内容自本页面公布之时起生效。</p>
     </section>
 
     <section class="legal-section">
-      <h2>12. 联系方式</h2>
+      <h2>13. 运营者与联系方式</h2>
+      <p>本应用及本政策的运营者为个体经营「dannpen」。</p>
       <p>
-        如对本政策有任何咨询，请通过应用内的"意见反馈"与我方联系。
+        如对本政策或用户信息处理有任何咨询，请通过应用内的「意见反馈」或以下邮箱与我方联系。
       </p>
+      <p><a href="mailto:echor.contact@dannpen.com">echor.contact@dannpen.com</a></p>
     </section>
 
   </main>

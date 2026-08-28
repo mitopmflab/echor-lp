@@ -11,6 +11,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://echor.dannpen.com/privacy/zh-hans" />
 <link rel="alternate" hreflang="zh-Hant" href="https://echor.dannpen.com/privacy/zh-hant" />
 <link rel="alternate" hreflang="ko" href="https://echor.dannpen.com/privacy/ko" />
+<link rel="alternate" hreflang="fr" href="https://echor.dannpen.com/privacy/fr" />
 <link rel="alternate" hreflang="x-default" href="https://echor.dannpen.com/privacy" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -20,14 +21,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="legal.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNYXX8JD79"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SNYXX8JD79');
-</script>
 </head>
 <body class="palette-warm">
 
@@ -51,8 +44,9 @@
         <a href="/privacy/zh-hans">简体中文</a>
         <a href="/privacy/zh-hant">繁體中文</a>
         <a href="/privacy/ko">한국어</a>
+        <a href="/privacy/fr">Français</a>
       </nav>
-      <p class="legal-date">最終更新日：2026年7月22日</p>
+      <p class="legal-date">最終更新日：2026年8月28日</p>
       <p class="legal-lead">
         本ポリシーでは、本アプリにおける情報の取得・利用・保存について説明します。
       </p>
@@ -98,6 +92,9 @@
         <li>安定したサービス運営</li>
       </ul>
       <p>本アプリは、ユーザーが入力したことばやノートの内容を、広告、利用状況分析、品質改善または不具合分析の目的で利用しません。</p>
+      <p>
+        Firebase Analyticsについては、EU/EEAをはじめとする一定の地域では、ユーザーが明示的に許可するまでの間、収集を行いません。詳細は「4. 外部サービスについて」をご覧ください。
+      </p>
     </section>
 
     <section class="legal-section">
@@ -123,17 +120,36 @@
     <section class="legal-section">
       <h2>4. 外部サービスについて</h2>
       <p>本アプリでは、品質改善および利用状況分析のため、Firebase Analytics および Firebase Crashlytics を利用しています。</p>
-      <p>これらのサービスでは、利用状況情報、クラッシュ情報、端末情報等が収集される場合があります。</p>
+
+      <p>Firebase Analyticsについて</p>
+      <p>
+        EU/EEAおよび実装上「同意対象地域」として扱う地域では、Firebase Analyticsによる収集は、ユーザーが明示的に許可するまでの間OFFとしています。許可・拒否はいずれも同じ操作性で選択でき、拒否した場合でも本アプリの機能が制限されることはありません。許可・拒否の設定は、後からアプリ内のSettings（設定）からいつでも変更できます。同意を撤回した場合、以後のAnalyticsによる収集は停止します。
+      </p>
+      <p>
+        同意対象地域に該当しない地域では、明示的な拒否が過去に確認されていない場合、Analyticsが有効になることがあります。同意対象地域に該当するかどうかの判定には、実装上、Appの言語設定ではなく端末のリージョン（デバイスの地域設定）をシグナルとして使用しています。このシグナルは、ユーザーの法的な居住地を確定するものではありません。
+      </p>
       <p>収集される可能性のある情報：</p>
       <ul>
-        <li>アプリ利用状況</li>
-        <li>画面表示イベント</li>
-        <li>OS情報</li>
-        <li>端末種別</li>
-        <li>アプリバージョン</li>
-        <li>通知設定変更イベント</li>
-        <li>クラッシュ情報 等</li>
+        <li>Googleにより算出されるおおよその（国・地域単位程度の）地理的位置情報</li>
+        <li>デバイスおよびアプリインスタンスの識別子</li>
+        <li>アプリ内での操作内容</li>
+        <li>画面や機能の利用状況</li>
+        <li>その他の利用状況データ</li>
+        <li>OS情報・端末種別・アプリバージョン</li>
+        <li>あらかじめ固定された範囲で集計されるアプリの利用指標</li>
       </ul>
+      <p>
+        Firebase（GA4）プロパティにおけるユーザーレベルおよびイベントレベルのデータ保持期間は14か月に設定しており、該当ユーザーに新しいアクティビティが記録されるたびに保持期間はリセットされる設定としています。なお、Google側の標準的な集計処理等にはこれとは別の保持ルールが適用される場合があるため、本アプリに関するすべてのAnalyticsデータが必ず14か月で削除されるとは限りません。
+      </p>
+
+      <p>Firebase Crashlyticsについて</p>
+      <p>
+        Firebase Crashlyticsは、Analyticsの許可・拒否設定とは独立して、クラッシュおよび品質・安定性に関する診断情報の取得のために利用しています。本アプリは、Crashlyticsにカスタムのユーザー識別子を設定していません。Crashlyticsに送信するカスタムキーやログは、あらかじめ定めた運用上の情報に限定しており、ことばやノートの本文その他の自由入力テキストを意図的に送信することはありません。ただし、クラッシュの発生状況、診断情報、端末・アプリに関する情報等は処理される場合があります。
+      </p>
+      <p>
+        Firebase公式の説明によれば、クラッシュのスタックトレースおよび関連する識別子は、取得から90日間保持された後、削除が開始されるとされています。また、本アプリでは現在、Crash Insights機能を意図的に有効にしています。この機能により、匿名化・集約された形でのクラッシュ傾向分析のため、Firebaseを利用する他のアプリのクラッシュ情報との比較が行われる場合があります。
+      </p>
+
       <p>
         本アプリでは、氏名・メールアドレス等、個人を直接特定できる情報を Firebase に送信しません。
       </p>
@@ -143,6 +159,15 @@
       <p>
         Google のプライバシーポリシー：<br/>
         <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+      </p>
+
+      <p>Webサイトのアクセス解析について</p>
+      <p>
+        echorのWebサイトでは、ページ閲覧数や流入傾向等を把握するため、Cloudflare Web Analyticsを利用します。Cloudflareの公式説明によれば、Cloudflare Web Analyticsは訪問者の個人データを収集または利用せず、利用状況の計測にCookieやlocalStorage等のクライアント側状態を使用しません。
+      </p>
+      <p>
+        Cloudflare のプライバシーポリシー：<br/>
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">https://www.cloudflare.com/privacypolicy/</a>
       </p>
     </section>
 
@@ -197,7 +222,24 @@
     </section>
 
     <section class="legal-section">
-      <h2>10. お問い合わせ・案内登録等を通じて取得する情報</h2>
+      <h2>10. EEA / フランスをはじめとする地域のユーザーへ</h2>
+      <p>
+        EEA（欧州経済領域）およびフランスを含む地域のユーザーについては、以下の点にご留意ください。
+      </p>
+      <ul>
+        <li>Analyticsに関する同意は、いつでも撤回できます。撤回は、撤回前に行われた処理の適法性には影響しません。</li>
+        <li>適用されるデータ保護法令に基づき、ユーザーは自己の情報についてアクセス、訂正、消去、処理の制限、異議、データポータビリティ等の権利を有する場合があります。</li>
+        <li>フランス在住のユーザーは、CNIL（フランス情報処理・自由委員会）に対して申立てを行うことができます。</li>
+        <li>本ポリシーおよびユーザーの情報の取扱いに関するお問い合わせは、引き続きアプリ内の「ご意見・ご要望」または本ポリシー末尾に記載の連絡先メールアドレスから受け付けます。</li>
+        <li>Google / Firebase等のサービスプロバイダーは、日本国外（EEA域外を含む）で情報を処理する場合があります。その場合、適用される契約上・法令上の保護措置（標準契約条項等）の対象となります。</li>
+      </ul>
+      <p>
+        EEAにおけるAnalyticsの取扱いは、ユーザーの同意を法的根拠としています。クラッシュ・信頼性に関する情報の取扱いについては、本アプリの安定運用およびセキュリティ維持という正当な利益（legitimate interests）を根拠として行う場合がありますが、これによって同意等の他の法的要件が一律に不要となるものではありません。
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>11. お問い合わせ・案内登録等を通じて取得する情報</h2>
       <p>
         当方は、お問い合わせ、各種案内登録、アンケート等を通じて、メールアドレス、入力内容その他ユーザーが送信した情報を取得する場合があります。
       </p>
@@ -212,16 +254,18 @@
     </section>
 
     <section class="legal-section">
-      <h2>11. 本ポリシーの変更</h2>
+      <h2>12. 本ポリシーの変更</h2>
       <p>本ポリシーは、必要に応じて変更される場合があります。</p>
       <p>変更後の内容は、本ページに掲載した時点から効力を生じるものとします。</p>
     </section>
 
     <section class="legal-section">
-      <h2>12. お問い合わせ</h2>
+      <h2>13. 運営者・お問い合わせ</h2>
+      <p>本アプリおよび本ポリシーの運営者は、個人事業「dannpen」です。</p>
       <p>
-        本ポリシーに関するお問い合わせは、アプリ内の「ご意見・ご要望」よりご連絡ください。
+        本ポリシーまたはユーザー情報の取扱いに関するお問い合わせは、アプリ内の「ご意見・ご要望」または以下のメールアドレスまでご連絡ください。
       </p>
+      <p><a href="mailto:echor.contact@dannpen.com">echor.contact@dannpen.com</a></p>
     </section>
 
   </main>
