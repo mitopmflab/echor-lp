@@ -193,3 +193,48 @@ a.nav-logo {
     font-size: 11.5px;
   }
 }
+
+/* ── v2.0.0 privacy: subheadings, numbered lists, nested lists, retention table ── */
+.legal-section h3 {
+  font-family: var(--f-jp);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .02em;
+  color: #3a342e;
+  margin: 26px 0 10px;
+}
+.legal-section p.legal-subhead { margin-top: 14px; }
+.legal-section ol {
+  margin: 0 0 10px;
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+.legal-section ol li,
+.legal-section ul ul li {
+  font-family: var(--f-jp);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.75;
+  letter-spacing: .02em;
+  color: var(--ink-1);
+  margin-bottom: 4px;
+}
+.legal-section ul ul { margin: 4px 0 4px; list-style: circle; }
+.legal-section a { overflow-wrap: anywhere; }
+.legal-table-wrap { overflow-x: auto; margin: 0 0 12px; }
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--f-jp);
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-1);
+}
+.legal-table th, .legal-table td {
+  border: 1px solid var(--rule);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.legal-table th { font-weight: 500; color: var(--ink-0); }
