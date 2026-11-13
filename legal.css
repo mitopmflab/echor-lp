@@ -258,6 +258,16 @@ a.nav-logo {
 }
 .legal-notice p:last-child { margin-bottom: 0; }
 .legal-notice strong { font-weight: 500; color: var(--ink-0); }
+.legal-notice-periods {
+  margin: 0 0 8px;
+  padding-left: 1.3em;
+  font-family: var(--f-jp);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-0);
+}
+.legal-notice-periods li { margin: 2px 0; }
 .legal-notice-links {
   display: flex;
   flex-wrap: wrap;
